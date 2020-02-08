@@ -12,16 +12,18 @@ const axios = require('axios')
 const BASE_URL = 'http://localhost:5000/fetch?url='
 const HomeTemplate = path.resolve('./src/components/Home.js')
 
-// exports.onCreateNode = ({ node }) => {
-//   console.log(node.internal.type)
-// }
-
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
   const resp = await axios.get(`${BASE_URL}http://www.thedp.com/section/centerpiece.json`)
 
   const topResp = await axios.get(`${BASE_URL}http://www.thedp.com/section/top.json`)
+
+  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
+
+  const most34Resp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/34ST`)
+
+  const mostUTBResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/UTB`)
 
   const { articles } = resp.data
 
@@ -32,7 +34,10 @@ exports.createPages = async ({ actions }) => {
     component: HomeTemplate,
     context: {
       centerpiece: articles[0],
-      topArticles: [topArticles[0], topArticles[1]]
+      topArticles: [topArticles[0], topArticles[1]],
+      mostReadDP: mostReadDPResp.data.result,
+      mostRead34: most34Resp.data.result,
+      mostReadUTB: mostUTBResp.data.result,
     }
   })
 }

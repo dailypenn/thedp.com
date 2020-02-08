@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { Row, Col, Container, Image } from 'react-bootstrap'
+import { Row, Col, Container, Image, Card, ListGroup } from 'react-bootstrap'
 import s from 'styled-components'
 
 import Layout from './layout'
@@ -36,6 +36,21 @@ const Home = () => {
             headline
             subhead
           }
+          mostReadDP {
+            path
+            image
+            ogTitle
+          }
+          mostRead34 {
+            path
+            image
+            ogTitle
+          }
+          mostReadUTB {
+            path
+            image
+            ogTitle
+          }
         }
       }
     }
@@ -43,6 +58,7 @@ const Home = () => {
 
   const centerpieceData = data.sitePage.context.centerpiece
   const topData = data.sitePage.context.topArticles
+  const mostReadDP = data.sitePage.context.mostReadDP
 
   const { dominantMedia, headline, abstract } = centerpieceData
   const { content, attachment_uuid } = dominantMedia
@@ -74,8 +90,23 @@ const Home = () => {
             </Row>
             <SubHeader> MOST RECENT </SubHeader>
             <SubHeader> FROM 34TH STREET </SubHeader>
+            <SubHeader> FROM UNDER THE BUTTON </SubHeader>
           </Col>
-          <Col xs={3}> 2 of 3 </Col>
+          <Col xs={3}>
+            <SubHeader> MOST READ </SubHeader>
+            <Card>
+              <ListGroup>
+                {mostReadDP.map((article, idx) => {
+                  return (
+                    <ListGroup.Item>
+                      {`${idx} ${article.ogTitle}`}
+                    </ListGroup.Item>
+                  )
+                })}
+              </ListGroup>
+            </Card>
+            
+          </Col>
         </Row>
       </Container>
     </Layout>
