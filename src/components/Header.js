@@ -2,6 +2,9 @@ import React, { useState } from "react"
 import s from "styled-components"
 import { Button, Nav, NavDropdown, Image, Row, Navbar } from "react-bootstrap"
 import Logo from '../images/icons/header-logo.svg'
+import FBLogo from '../images/icons/facebook.svg'
+import InstaLogo from '../images/icons/instagram.svg'
+import TwitLogo from '../images/icons/twitter.svg'
 
 
 const TopRow = s(Row)`
@@ -94,6 +97,15 @@ const NavLink = s(Nav.Link)`
   font-family: "Heebo", sans-serif;
 `
 
+const SocialIcons = s(Nav)`
+  margin-left: auto;
+  margin-right: 10px;
+`
+
+const SocialIconWrapper = s.a`
+  padding: 15px;
+`
+
 // TODO: Make mcModal trigger a modal
 const Header = () => {
   const [search, setSearch] = useState(false)
@@ -133,7 +145,17 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
         </NavbarContainer>
-      </Navbar>
+        <SocialIcons>
+          <SocialIconWrapper>
+            <FBLogo width="20px"/>
+          </SocialIconWrapper>
+          <SocialIconWrapper>
+            <TwitLogo  width="20px"/>
+          </SocialIconWrapper>
+          <SocialIconWrapper>
+            <InstaLogo  width="20px"/>
+          </SocialIconWrapper>
+        </SocialIcons>
       </HeaderNavbar>
     </header>
   )
