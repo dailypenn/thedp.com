@@ -16,19 +16,23 @@ const HomeTemplate = path.resolve('./src/components/Home.js')
 //   console.log(node.internal.type)
 // }
 
-exports.createPages = async ({ graphql, actions }) => {
+exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
   const resp = await axios.get(`${BASE_URL}http://www.thedp.com/section/centerpiece.json`)
 
+  const topResp = await axios.get(`${BASE_URL}http://www.thedp.com/section/top.json`)
+
   const { articles } = resp.data
+
+  const { articles: topArticles } = topResp.data
 
   createPage({
     path: '/',
     component: HomeTemplate,
     context: {
-      centerpiece: articles[0]
+      centerpiece: articles[0],
+      topArticles: [topArticles[0], topArticles[1]]
     }
   })
-
 }

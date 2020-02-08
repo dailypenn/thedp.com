@@ -21,14 +21,25 @@ const Home = () => {
             headline
             subhead
           }
+          topArticles {
+            abstract
+            content
+            dominantMedia {
+              attachment_uuid
+              content
+            }
+            headline
+            subhead
+          }
         }
       }
     }
   `)
 
   const centerpieceData = data.sitePage.context.centerpiece
+  const topData = data.sitePage.context.topArticles
 
-  const { dominantMedia } = centerpieceData
+  const { dominantMedia, headline, abstract } = centerpieceData
   const { content, attachment_uuid } = dominantMedia
 
   return (
@@ -37,12 +48,23 @@ const Home = () => {
       <Container>
         <Row>
           <Col xs={9}>
+            <h1> NEWS </h1>
             <Row>
-              <h1> News </h1>
               <Col xs={3}>
+                {topData.map(article => {
+                  const { dominantMedia: { attachment_uuid }, headline } = article
+                  return (
+                    <>
+                      <Image fluid src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} />
+                      { headline }
+                    </>
+                  )
+                })}
               </Col>
               <Col xs={9}>
                 <Image src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} fluid/>
+                <h4> {headline} </h4>
+                {abstract}
               </Col>
             </Row>
           </Col>
