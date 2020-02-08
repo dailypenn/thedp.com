@@ -1,9 +1,14 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { Row, Col, Container, Image } from 'react-bootstrap'
+import s from 'styled-components'
 
 import Layout from './layout'
 import SEO from './seo'
+
+const SubHeader = s.h3`
+  color: '#4B4B4B'
+`
 
 const Home = () => {
   const data = useStaticQuery(graphql`
@@ -48,7 +53,7 @@ const Home = () => {
       <Container>
         <Row>
           <Col xs={9} style={{ borderRight: '1px solid #A9A9A9' }}>
-            <h3 style={{ color: '#4B4B4B' }} > NEWS </h3>
+            <SubHeader > NEWS </SubHeader>
             <Row style={{ marginBottom: '1em', borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
               <Col xs={3} style={{ borderRight: '1px solid #EBEBEB' }}>
                 {topData.map(article => {
@@ -67,7 +72,8 @@ const Home = () => {
                 {abstract}
               </Col>
             </Row>
-            <h3> MOST RECENT </h3>
+            <SubHeader> MOST RECENT </SubHeader>
+            <SubHeader> FROM 34TH STREET </SubHeader>
           </Col>
           <Col xs={3}> 2 of 3 </Col>
         </Row>
