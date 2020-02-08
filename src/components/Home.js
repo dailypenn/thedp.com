@@ -10,6 +10,15 @@ const SubHeader = s.h3`
   color: '#4B4B4B'
 `
 
+const MostReadCard = ({ idx, content }) => {
+  return (
+    <Row>
+      <Col xs={3} style={{ color: '#AA1E22', fontSize: '36px' }}> {idx} </Col>
+      <Col> {content} </Col>
+    </Row>
+  )
+}
+
 const Home = () => {
   const data = useStaticQuery(graphql`
     query MyQuery {
@@ -66,7 +75,7 @@ const Home = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Container>
+      <Container style={{ marginTop: '1.5em' }}>
         <Row>
           <Col xs={9} style={{ borderRight: '1px solid #A9A9A9' }}>
             <SubHeader > NEWS </SubHeader>
@@ -93,19 +102,18 @@ const Home = () => {
             <SubHeader> FROM UNDER THE BUTTON </SubHeader>
           </Col>
           <Col xs={3}>
-            <SubHeader> MOST READ </SubHeader>
+            <SubHeader style={{ color: '#AA1E22' }}> MOST READ </SubHeader>
             <Card>
               <ListGroup>
                 {mostReadDP.map((article, idx) => {
                   return (
                     <ListGroup.Item>
-                      {`${idx} ${article.ogTitle}`}
+                      <MostReadCard idx={idx+1} content={article.ogTitle} />
                     </ListGroup.Item>
                   )
                 })}
               </ListGroup>
             </Card>
-            
           </Col>
         </Row>
       </Container>

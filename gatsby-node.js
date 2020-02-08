@@ -35,9 +35,9 @@ exports.createPages = async ({ actions }) => {
     context: {
       centerpiece: articles[0],
       topArticles: [topArticles[0], topArticles[1]],
-      mostReadDP: mostReadDPResp.data.result,
-      mostRead34: most34Resp.data.result,
-      mostReadUTB: mostUTBResp.data.result,
+      mostReadDP: mostReadDPResp.data.result.slice(0, 5),
+      mostRead34: most34Resp.data.result.slice(0, 3),
+      mostReadUTB: mostUTBResp.data.result.slice(0, 3),
     }
   })
 }
