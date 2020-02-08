@@ -5,6 +5,7 @@ import Logo from '../images/icons/header-logo.svg'
 import FBLogo from '../images/icons/facebook.svg'
 import InstaLogo from '../images/icons/instagram.svg'
 import TwitLogo from '../images/icons/twitter.svg'
+import SearchIcon from '../images/icons/search.svg'
 
 
 const TopRow = s(Row)`
@@ -102,7 +103,7 @@ const SocialIcons = s(Nav)`
   margin-right: 10px;
 `
 
-const SocialIconWrapper = s.a`
+const IconWrapper = s.a`
   padding: 15px;
 `
 
@@ -127,12 +128,17 @@ const Header = () => {
           <DonateButton variant="inverse" size="sm">
             DONATE
           </DonateButton>
-        </ButtonWrapper>
-      </TopRow>
+        </ButtonWrapper>￼
+        </TopRow>
       <HeaderNavbar>
         <NavbarContainer>
           <Navbar.Collapse>
             <Nav>
+              <Navbar.Brand>
+              <IconWrapper>
+                <SearchIcon width="16px" />
+              </IconWrapper>
+              </Navbar.Brand>
               <NavDate>
                 February 8th, 2020
               </NavDate>
@@ -146,15 +152,15 @@ const Header = () => {
           </Navbar.Collapse>
         </NavbarContainer>
         <SocialIcons>
-          <SocialIconWrapper>
-            <FBLogo width="20px"/>
-          </SocialIconWrapper>
-          <SocialIconWrapper>
-            <TwitLogo  width="20px"/>
-          </SocialIconWrapper>
-          <SocialIconWrapper>
-            <InstaLogo  width="20px"/>
-          </SocialIconWrapper>
+          <IconWrapper>
+            <FBLogo width="20px" />
+          </IconWrapper>
+          <IconWrapper>
+            <TwitLogo width="20px" />
+          </IconWrapper>
+          <IconWrapper>
+            <InstaLogo width="20px" />
+          </IconWrapper>
         </SocialIcons>
       </HeaderNavbar>
     </header>
