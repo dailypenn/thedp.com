@@ -36,17 +36,17 @@ const Home = () => {
       <SEO title="Home" />
       <Container>
         <Row>
-          <Col xs={7}>
+          <Col xs={9}>
             <Row>
-              <Col>
+              <h1> News </h1>
+              <Col xs={3}>
               </Col>
-              <Col>
-              1 of 1
-                {/* <Image src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} fluid/> */}
+              <Col xs={9}>
+                <Image src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} fluid/>
               </Col>
             </Row>
           </Col>
-          <Col xs={5}> 2 of 3 </Col>
+          <Col xs={3}> 2 of 3 </Col>
         </Row>
       </Container>
     </Layout>

@@ -2,6 +2,9 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
+// import SVGs from /image folder
+import FBSVG from '../images/icons/facebook.svg'
+
 const Header = ({ siteTitle }) => (
   <header
     style={{
@@ -25,6 +28,7 @@ const Header = ({ siteTitle }) => (
           }}
         >
           {siteTitle}
+          <FBSVG />
         </Link>
       </h1>
     </div>
