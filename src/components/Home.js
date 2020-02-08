@@ -47,10 +47,10 @@ const Home = () => {
       <SEO title="Home" />
       <Container>
         <Row>
-          <Col xs={9}>
-            <h1> NEWS </h1>
-            <Row>
-              <Col xs={3}>
+          <Col xs={9} style={{ borderRight: '1px solid #A9A9A9' }}>
+            <h3 style={{ color: '#4B4B4B' }} > NEWS </h3>
+            <Row style={{ marginBottom: '1em', borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
+              <Col xs={3} style={{ borderRight: '1px solid #EBEBEB' }}>
                 {topData.map(article => {
                   const { dominantMedia: { attachment_uuid }, headline } = article
                   return (
@@ -67,6 +67,7 @@ const Home = () => {
                 {abstract}
               </Col>
             </Row>
+            <h3> MOST RECENT </h3>
           </Col>
           <Col xs={3}> 2 of 3 </Col>
         </Row>

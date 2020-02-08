@@ -2,39 +2,11 @@ import React, { useState } from "react"
 import s from "styled-components"
 import { Button, Dropdown, Image, Row, Navbar } from "react-bootstrap"
 import Logo from '../images/icons/header-logo.svg'
-import FBSVG from '../images/icons/facebook.svg'
 
 
 // import SVGs from /image folder
 import FBSVG from '../images/icons/facebook.svg'
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-          <FBSVG />
-        </Link>
-      </h1>
-    </div>
 const TopRow = s(Row)`
   text-align: center;
   padding: 20px 0 10px;
