@@ -1,20 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 
-const BASE_URL = 'http://localhost:5000/fetch?url='
+import Layout from './layout'
+import SEO from './seo'
 
 const Home = () => {
-  const [centerpiece, setCenterpiece] = useState([])
-  useEffect(() => {
-    axios.get(`${BASE_URL}http://www.thedp.com/section/centerpiece.json`)
-      .then(resp => {
-        const { articles } = resp.data
-        setCenterpiece(articles[0])
-      })
-  }, [])
+  const data = useStaticQuery(graphql`
+    query MyQuery {
+      sitePage(path: {eq: "/"}) {
+        path
+        context {
+          centerpiece {
+            abstract
+            content
+            dominantMedia {
+              content
+              attachment_uuid
+            }
+            headline
+            subhead
+          }
+        }
+      }
+    }
+  `)
+
+  const centerpieceData = data.sitePage.context.centerpiece
+
+  const { dominantMedia } = centerpieceData
+  const { content, attachment_uuid } = dominantMedia
 
   return (
-    <h1> { centerpiece.headline } </h1>
+    <Layout>
+      <SEO title="Home" />
+      <h1> Created a Page </h1>
+      <img src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} />
+    </Layout>
   )
 }
 
