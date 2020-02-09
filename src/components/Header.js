@@ -40,7 +40,7 @@ const HeaderLogoWrapper = s.div`
   text-align: center;
 `
 
-const ButtonWrapper = s.div`
+const ButtonWrapper1 = s.div`
   position: absolute;
   right: 40px;
   top: 20px;
@@ -115,21 +115,21 @@ const Header = () => {
   return (
     <header>
       <TopRow className="hidden-xs">
-        <HeaderLogoWrapper href="/">
+        <HeaderLogoWrapper>
           <HeaderLogo />
           <HeaderLogoText>
             Founded in 1885
           </HeaderLogoText>
         </HeaderLogoWrapper>
-        <ButtonWrapper>
+        <ButtonWrapper1>
           <NewsButton variant="primary" size="sm">
             NEWSLETTERS
-            </NewsButton>
+          </NewsButton>
           <DonateButton variant="inverse" size="sm">
             DONATE
           </DonateButton>
-        </ButtonWrapper>￼
-        </TopRow>
+        </ButtonWrapper1>￼
+      </TopRow>
       <HeaderNavbar>
         <NavbarContainer>
           <Navbar.Collapse>

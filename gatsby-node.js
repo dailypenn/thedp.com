@@ -34,7 +34,7 @@ exports.createPages = async ({ actions }) => {
     component: HomeTemplate,
     context: {
       centerpiece: articles[0],
-      topArticles: [topArticles[0], topArticles[1]],
+      topArticles: topArticles.slice(0,3),
       mostReadDP: mostReadDPResp.data.result.slice(0, 5),
       mostRead34: most34Resp.data.result.slice(0, 3),
       mostReadUTB: mostUTBResp.data.result.slice(0, 3),
