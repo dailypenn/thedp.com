@@ -67,5 +67,5 @@ exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
   await createHomePage(createPage)
-  await createArticles(createPage)
+  // await createArticles(createPage)
 }
