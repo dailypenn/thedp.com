@@ -4,8 +4,6 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
-
 const path = require('path')
 const axios = require('axios')
 
@@ -45,8 +43,8 @@ const createHomePage = async (createPage) => {
 
 // TODO: add action for creating article pages
 const createArticles = async (createPage) => {
-  const newsResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
-  newsResp.data.articles.forEach(article => {
+  const resp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
+  resp.data.articles.forEach(article => {
     createPage({
       path: '/',
       component: HomeTemplate,

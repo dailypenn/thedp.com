@@ -37,7 +37,13 @@ const MostReadCard = ({ idx, content }) => {
   )
 }
 
-const Home = ({ pageContext: context }) => {
+interface IHomeProps {
+  pageContext: {
+    centerpiece: string[]
+  }
+}
+
+const Home = ({ pageContext: context }: IHomeProps) => {
   const {
     centerpiece: centerpieceData,
     topArticles: topData,
