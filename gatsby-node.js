@@ -63,6 +63,7 @@ const createArticles = async (createPage) => {
 
 const createAutors = async (createPage, slug) => {
   const resp = await axios.get(`${BASE_URL}https://www.thedp.com/staff/${slug}.json`)
+  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
   const { author, articles } = resp.data
   let filteredArticles = []
   if (articles) {
@@ -71,12 +72,14 @@ const createAutors = async (createPage, slug) => {
       return article
     })
   }
-  
+
   createPage({
     path: `staff/${slug}`,
     component: AuthorTemplate,
     context: {
-      filteredArticles
+      filteredArticles,
+      author,
+      mostReadDP: mostReadDPResp.data.result.slice(0, 5),
     }
   })
 }
