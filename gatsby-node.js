@@ -9,6 +9,8 @@ const axios = require('axios')
 
 const BASE_URL = 'http://localhost:5000/fetch?url='
 const HomeTemplate = path.resolve('./src/templates/HomePage.js')
+const ArticleTemplate = path.resolve('./src/templates/Article.js')
+const AuthorTemplate = path.resolve('./src/templates/Author.js')
 
 // TODO: add action from create HomePage
 const createHomePage = async (createPage) => {
@@ -43,27 +45,43 @@ const createHomePage = async (createPage) => {
 
 // TODO: add action for creating article pages
 const createArticles = async (createPage) => {
-  const resp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
-  resp.data.articles.forEach(article => {
+  const newsResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
+  newsResp.data.articles.forEach(article => {
+    const { authors } = article
+    authors.forEach(async author => await createAutors(createPage, author.slug))
     createPage({
-      path: '/',
-      component: HomeTemplate,
+      path: article.slug,
+      component: ArticleTemplate,
       context: {
-        centerpiece: articles[0],
-        topArticles: topArticles.slice(0,3),
-        mostReadDP: mostReadDPResp.data.result.slice(0, 5),
-        mostRead34: most34Resp.data.result.slice(0, 3),
-        mostReadUTB: mostUTBResp.data.result.slice(0, 3),
+        article
       }
     })
   })
 }
 
-
+const createAutors = async (createPage, slug) => {
+  const resp = await axios.get(`${BASE_URL}https://www.thedp.com/staff/${slug}.json`)
+  const { author, articles } = resp.data
+  let filteredArticles = []
+  if (articles) {
+    filteredArticles = articles.map(article => {
+      delete article.content
+      return article
+    })
+  }
+  
+  createPage({
+    path: `staff/${slug}`,
+    component: AuthorTemplate,
+    context: {
+      filteredArticles
+    }
+  })
+}
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
   await createHomePage(createPage)
-  // await createArticles(createPage)
+  await createArticles(createPage)
 }
