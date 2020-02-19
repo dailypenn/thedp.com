@@ -6,6 +6,7 @@ import s from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
+import { IArticle } from '../types'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -39,7 +40,7 @@ const MostReadCard = ({ idx, content }) => {
 
 interface IHomeProps {
   pageContext: {
-    centerpiece: string[]
+    centerpiece: IArticle
   }
 }
 
@@ -144,49 +145,5 @@ const Home = ({ pageContext: context }: IHomeProps) => {
     </Layout>
   )
 }
-
-// export const query = graphql`
-// query($slug: String!) {
-//   sitePage(path: {eq: $slug}) {
-//     path
-//     context {
-//       centerpiece {
-//         abstract
-//         content
-//         dominantMedia {
-//           content
-//           attachment_uuid
-//         }
-//         subhead
-//         headline
-//       }
-//       topArticles {
-//         abstract
-//         content
-//         dominantMedia {
-//           attachment_uuid
-//           content
-//         }
-//         headline
-//       }
-//       mostReadDP {
-//         path
-//         image
-//         ogTitle
-//       }
-//       mostRead34 {
-//         path
-//         image
-//         ogTitle
-//       }
-//       mostReadUTB {
-//         path
-//         image
-//         ogTitle
-//       }
-//     }
-//   }
-// }
-// `
 
 export default Home
