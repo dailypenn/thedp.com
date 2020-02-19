@@ -1,4 +1,4 @@
-export interface IAuthor {
+interface IAuthor {
   id: string
   uuid: string
   name: string
@@ -38,4 +38,13 @@ export interface IArticle {
     content: string
 
   }
+}
+
+export interface IMostReadArticle {
+  gaTitle: string
+  ogTitle: string
+  path: string
+  authors: string[]
+  views: string
+  image: string
 }

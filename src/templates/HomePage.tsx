@@ -6,7 +6,7 @@ import s from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
-import { IArticle } from '../types'
+import { IArticle, IMostReadArticle } from '../types'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -29,7 +29,12 @@ const Line = s(Row)`
   border-bottom: 1px solid #EBEBEB;
 `
 
-const MostReadCard = ({ idx, content }) => {
+interface IMostReadCardProps {
+  idx: number
+  content: string
+}
+
+const MostReadCard = ({ idx, content }: IMostReadCardProps) => {
   return (
     <Row>
       <Col xs={3} style={{ color: '#AA1E22', fontSize: '36px' }}> {idx} </Col>
@@ -41,6 +46,10 @@ const MostReadCard = ({ idx, content }) => {
 interface IHomeProps {
   pageContext: {
     centerpiece: IArticle
+    topArticles: IArticle[]
+    mostReadDP: IMostReadArticle[]
+    mostRead34: IMostReadArticle[]
+    mostReadUTB: IMostReadArticle[]
   }
 }
 

@@ -5,14 +5,17 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 
-import Header from "./Header.jsx"
-import "./layout.css"
+import Header from './Header'
+import './layout.css'
 
-const Layout = ({ children }) => {
+interface ILayoutProps {
+  children: React.ReactNode | React.ReactNodeArray
+}
+
+const Layout = ({ children }: ILayoutProps): React.ReactElement => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -31,7 +34,7 @@ const Layout = ({ children }) => {
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossorigin="anonymous"
       />
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header />
       <div
         style={{
           padding: `0 0.1rem`,
@@ -41,10 +44,6 @@ const Layout = ({ children }) => {
       </div>
     </>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout
