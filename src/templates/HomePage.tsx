@@ -6,6 +6,7 @@ import s from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
+import { IArticle, IMostReadArticle } from '../types'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -28,7 +29,12 @@ const Line = s(Row)`
   border-bottom: 1px solid #EBEBEB;
 `
 
-const MostReadCard = ({ idx, content }) => {
+interface IMostReadCardProps {
+  idx: number
+  content: string
+}
+
+const MostReadCard = ({ idx, content }: IMostReadCardProps) => {
   return (
     <Row>
       <Col xs={3} style={{ color: '#AA1E22', fontSize: '36px' }}> {idx} </Col>
@@ -37,7 +43,17 @@ const MostReadCard = ({ idx, content }) => {
   )
 }
 
-const Home = ({ pageContext: context }) => {
+interface IHomeProps {
+  pageContext: {
+    centerpiece: IArticle
+    topArticles: IArticle[]
+    mostReadDP: IMostReadArticle[]
+    mostRead34: IMostReadArticle[]
+    mostReadUTB: IMostReadArticle[]
+  }
+}
+
+const Home = ({ pageContext: context }: IHomeProps) => {
   const {
     centerpiece: centerpieceData,
     topArticles: topData,
@@ -138,49 +154,5 @@ const Home = ({ pageContext: context }) => {
     </Layout>
   )
 }
-
-// export const query = graphql`
-// query($slug: String!) {
-//   sitePage(path: {eq: $slug}) {
-//     path
-//     context {
-//       centerpiece {
-//         abstract
-//         content
-//         dominantMedia {
-//           content
-//           attachment_uuid
-//         }
-//         subhead
-//         headline
-//       }
-//       topArticles {
-//         abstract
-//         content
-//         dominantMedia {
-//           attachment_uuid
-//           content
-//         }
-//         headline
-//       }
-//       mostReadDP {
-//         path
-//         image
-//         ogTitle
-//       }
-//       mostRead34 {
-//         path
-//         image
-//         ogTitle
-//       }
-//       mostReadUTB {
-//         path
-//         image
-//         ogTitle
-//       }
-//     }
-//   }
-// }
-// `
 
 export default Home

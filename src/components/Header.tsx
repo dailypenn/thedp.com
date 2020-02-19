@@ -136,7 +136,7 @@ const Header = () => {
             <Nav>
               <Navbar.Brand>
               <IconWrapper>
-                <SearchIcon width="16px" />
+                <SearchIcon style={{ width: '16px' }} />
               </IconWrapper>
               </Navbar.Brand>
               <NavDate>
@@ -153,13 +153,13 @@ const Header = () => {
         </NavbarContainer>
         <SocialIcons>
           <IconWrapper>
-            <FBLogo width="20px" />
+            <FBLogo style={{ width: '20px' }} />
           </IconWrapper>
           <IconWrapper>
-            <TwitLogo width="20px" />
+            <TwitLogo style={{ width: '20px' }} />
           </IconWrapper>
           <IconWrapper>
-            <InstaLogo width="20px" />
+            <InstaLogo style={{ width: '20px' }} />
           </IconWrapper>
         </SocialIcons>
       </HeaderNavbar>

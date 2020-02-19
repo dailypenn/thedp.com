@@ -8,9 +8,7 @@ const path = require('path')
 const axios = require('axios')
 
 const BASE_URL = 'http://localhost:5000/fetch?url='
-const HomeTemplate = path.resolve('./src/templates/HomePage.js')
-const ArticleTemplate = path.resolve('./src/templates/Article.js')
-const AuthorTemplate = path.resolve('./src/templates/Author.js')
+const HomeTemplate = path.resolve('./src/templates/HomePage.tsx')
 
 // TODO: add action from create HomePage
 const createHomePage = async (createPage) => {
@@ -83,5 +81,5 @@ exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
   await createHomePage(createPage)
-  await createArticles(createPage)
+  // await createArticles(createPage)
 }
