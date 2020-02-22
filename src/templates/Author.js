@@ -65,12 +65,12 @@ const Author = ({ pageContext: context }) => {
                         <Row>
                           <h5>{headline}</h5>
                           <p dangerouslySetInnerHTML={{ __html:  abstract}}/>
-                          {/* {filteredArticles[0].abstract} */}
                         </Row>
                       </Col>
                     </Row>
                   )
               })}
+              <Filler/>
           </Col>
           <Col xs={3} style = {{borderLeft: '1px solid #A9A9A9', padding: '1em'}}>
               <Filler/>
