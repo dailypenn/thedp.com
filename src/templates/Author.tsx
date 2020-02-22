@@ -6,6 +6,10 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
 
+import { MostReadCard } from '../components/shared'
+import RightCol from '../components/home/RightCol'
+import { IArticle, IAuthor, IMostReadArticle } from '../types'
+
 const SubHeader = s.h3`
   color: #aa1e22;
   font-size: 30px;
@@ -22,16 +26,15 @@ const Filler = s.div`
   background-color: #DFF3DB;
 `
 
-const MostReadCard = ({ idx, content }) => {
-  return (
-    <Row>
-      <Col xs={3} style={{ color: '#AA1E22', fontSize: '36px' }}> {idx} </Col>
-      <Col> <p dangerouslySetInnerHTML={{ __html: content }} style={{ fontSize: '80%' }} /> </Col>
-    </Row>
-  )
+interface IAuthorProps {
+  pageContext: {
+    filteredArticles: IArticle[]
+    author: IAuthor
+    mostReadDP: IMostReadArticle[]
+  }
 }
 
-const Author = ({ pageContext: context }) => {
+const Author = ({ pageContext: context }: IAuthorProps) => {
   console.log(context)
   const { filteredArticles, author, mostReadDP } = context
 
@@ -72,25 +75,8 @@ const Author = ({ pageContext: context }) => {
               })}
               <Filler/>
           </Col>
-          <Col xs={3} style = {{borderLeft: '1px solid #A9A9A9', padding: '1em'}}>
-              <Filler/>
-              <SubHeader style={{ color: '#AA1E22' }}> MOST READ </SubHeader>
-              <Card>
-                <ListGroup>
-                  {mostReadDP.map((article, idx) => {
-                    return (
-                      <ListGroup.Item>
-                        <MostReadCard idx={idx + 1} content={article.ogTitle} />
-                      </ListGroup.Item>
-                    )
-                  })}
-                </ListGroup>
-              </Card>
-              <Filler/>
-              <SubHeader style={{ color: '#AA1E22' }}> PENNCONNECTS </SubHeader>
-              <Filler/>
-              <Filler/>
-          </Col>
+          <RightCol mostReadDP={mostReadDP} />
+          
         </Row>
       </Container>
       <Footer />

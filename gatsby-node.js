@@ -9,6 +9,8 @@ const axios = require('axios')
 
 const BASE_URL = 'http://localhost:5000/fetch?url='
 const HomeTemplate = path.resolve('./src/templates/HomePage.tsx')
+const AuthorTemplate = path.resolve('./src/templates/Author.tsx')
+const ArticleTemplate = path.resolve('./src/templates/Article.tsx')
 
 // TODO: add action from create HomePage
 const createHomePage = async (createPage) => {
@@ -46,7 +48,7 @@ const createArticles = async (createPage) => {
   const newsResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
   newsResp.data.articles.forEach(article => {
     const { authors } = article
-    authors.forEach(async author => await createAutors(createPage, author.slug))
+    authors.forEach(async author => await createAuthors(createPage, author.slug))
     createPage({
       path: article.slug,
       component: ArticleTemplate,
@@ -57,7 +59,7 @@ const createArticles = async (createPage) => {
   })
 }
 
-const createAutors = async (createPage, slug) => {
+const createAuthors = async (createPage, slug) => {
   const resp = await axios.get(`${BASE_URL}https://www.thedp.com/staff/${slug}.json`)
   const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
   const { author, articles } = resp.data
@@ -84,5 +86,5 @@ exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
   await createHomePage(createPage)
-  // await createArticles(createPage)
+  await createArticles(createPage)
 }
