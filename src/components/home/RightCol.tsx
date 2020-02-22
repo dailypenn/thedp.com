@@ -1,8 +1,9 @@
 import React from 'react'
-import { Row, Col, Card, ListGroup } from 'react-bootstrap'
+import { Col, Card, ListGroup } from 'react-bootstrap'
 import s from 'styled-components'
 
 import { IMostReadArticle } from '../../types'
+import { MostReadCard } from '../shared'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -11,20 +12,6 @@ const SubHeader = s.h3`
   line-height: 1.0;
   margin: 0.5em 0;
 `
-
-interface IMostReadCardProps {
-  idx: number
-  content: string
-}
-
-const MostReadCard = ({ idx, content }: IMostReadCardProps) => {
-  return (
-    <Row>
-      <Col xs={3} style={{ color: '#AA1E22', fontSize: '36px' }}> {idx} </Col>
-      <Col> <p dangerouslySetInnerHTML={{ __html: content }} style={{ fontSize: '80%' }} /> </Col>
-    </Row>
-  )
-}
 
 interface IRightColProps {
   mostReadDP: IMostReadArticle[]
