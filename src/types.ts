@@ -36,7 +36,7 @@ export interface IArticle {
     attachment_uuid: string
     title: string
     content: string
-
+    created_at: string
   }
 }
 
