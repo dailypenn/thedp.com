@@ -34,8 +34,10 @@ const AuthorName = s.h3`
 const Filler = s.div`
   margin-top: 1em;
   margin-right: 1em;
-  margin-bottom: 1em;
+  margin-left: 1em;
+  margin-bottom: 2em;
   height: 90px;
+  align: center;
   background-color: #DFF3DB;
 `
 
@@ -43,7 +45,7 @@ const Filler1 = s.div`
   margin-top: 1em;
   margin-right: 1em;
   margin-bottom: 1em;
-  height: 110px;
+  height: 130px;
   background-color: rgba(170, 30, 34, 0.25);
 `
 
