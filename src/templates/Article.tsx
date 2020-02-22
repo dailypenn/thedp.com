@@ -1,13 +1,10 @@
 import React from 'react'
-import { Row, Col, Container, Image, Card, ListGroup } from 'react-bootstrap'
+import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
-
 import RightCol from '../components/home/RightCol'
 import Layout from '../components/layout'
-//import SEO from '../components/seo'
 import Footer from '../components/Footer'
 import { IArticle, IMostReadArticle } from '../types'
-import { MostReadCard } from '../components/shared'
 
 const SubHeader = s.h3`
   color: #black;
@@ -33,15 +30,7 @@ const Filler = s.div`
   margin-bottom: 2em;
   height: 90px;
   align: center;
-  background-color: #DFF3DB;
-`
-
-const Filler1 = s.div`
-  margin-top: 1em;
-  margin-right: 1em;
-  margin-bottom: 1em;
-  height: 130px;
-  background-color: rgba(170, 30, 34, 0.25);
+  background-color: ${({ color }) => color};
 `
 
 const Line = s(Row)`
@@ -71,27 +60,24 @@ const Article = ({ pageContext: context }: IArticleProps ) => {
             <SubHeader style={{fontSize: '15px'}} dangerouslySetInnerHTML={{ __html: abstract }} />
             <AuthorName>By {name}</AuthorName>
             <p>{created_at}</p>
-            <Filler />
+            <Filler color={'#DFF3DB'}/>
               <Image src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} fluid />
               <p dangerouslySetInnerHTML={{ __html: content }} />
               <SubHeader style={{ color: '#AA1E22' }}> READ MORE </SubHeader>
-            <Line />
-            
+            <Line /> 
             <Row style={{ marginTop: '1em' }}>
-
               <Col xs={4} style={{ fontSize: '90%', padding: '0 .6em', borderRight: '1px solid #EBEBEB' }}>
-                <Filler1/>
+                <Filler color={'rgba(170, 30, 34, 0.25)'}/>
                 <SubHeader style={{fontSize: '25px'}}> Suggestion Article Title 1 </SubHeader>
               </Col>
               <Col xs={4} style={{ fontSize: '90%', padding: '0 .6em', borderRight: '1px solid #EBEBEB' }}>
-                <Filler1/>
+                <Filler color={'rgba(170, 30, 34, 0.25)'}/>
                 <SubHeader style={{fontSize: '25px'}}> Suggestion Article Title 2 </SubHeader>
               </Col>
-              <Col xs={4}style={{ fontSize: '90%', padding: '0 .6em' }}>
-                <Filler1/>
+              <Col xs={4} style={{ fontSize: '90%', padding: '0 .6em' }}>
+                <Filler color={'rgba(170, 30, 34, 0.25)'}/>
                 <SubHeader style={{fontSize: '25px'}} > Suggestion Article Title 3 </SubHeader>
               </Col>
-              
             </Row>
           </Col>
           <RightCol mostReadDP={mostReadDP} />
