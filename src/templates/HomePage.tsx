@@ -1,5 +1,4 @@
 import React from 'react'
-// import { graphql } from 'gatsby'
 import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
 
