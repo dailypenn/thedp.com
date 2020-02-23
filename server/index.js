@@ -10,9 +10,7 @@ app.get('/*', (_, res, next) => {
 
 // Request the data from the url and return it
 app.get('/fetch', async ({
-  query: {
-    url = ""
-  }
+  query: { url = "" }
 }, res) => {
   try {
     if (!url) throw new Error("No url param found in query")
