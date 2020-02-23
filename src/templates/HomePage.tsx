@@ -5,7 +5,7 @@ import s from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
-import RightCol from '../components/home/RightCol'
+import RightCol from '../components/Home/RightCol'
 import { IArticle, IMostReadArticle } from '../types'
 
 const SubHeader = s.h3`
