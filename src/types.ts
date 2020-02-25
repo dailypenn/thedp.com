@@ -49,3 +49,8 @@ export interface IMostReadArticle {
   views: string
   image: string
 }
+
+export interface ILink {
+  section: string,
+  slug: string
+}

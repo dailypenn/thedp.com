@@ -1,7 +1,4 @@
-interface ILink {
-  section: string,
-  slug: string
-}
+import { ILink } from './types'
 
 export const AboutLinks: ILink[] = [
   {

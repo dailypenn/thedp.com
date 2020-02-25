@@ -11,6 +11,7 @@ import {
   UnderTheButtonLinks
 } from '../constants'
 import { StyledLink, StyledAnchorTag } from '../components/shared'
+import { ILink  } from '../types'
 
 const Wrapper = s.div`
   padding: 0 10em;
@@ -31,37 +32,28 @@ const SNOImg = s.img`
   margin: 0 5px;
 `
 
-const FooterLinks = linksArray => {
+const FooterLinks = (linksArray: ILink[]) => {
   return (
     <Col>
       {linksArray.map((link, idx) => {
-        if (idx === 0 ) {
+        if (idx === 0) {
+          if (link.slug.includes('https')) {
+            return (
+              <p><strong><StyledAnchorTag href={link.slug}>{link.section}</StyledAnchorTag></strong></p>
+            )
+          }
           return (
             <p><strong><StyledLink to={link.slug}>{link.section}</StyledLink></strong></p>
           )
-        } else {
-          return (
-            <p><StyledLink to={link.slug}>{link.section}</StyledLink></p>
-          )
-        }
-      })}
-    </Col>
-  )
-}
-
-const FooterAnchorLinks = linksArray => {
-  return (
-    <Col>
-      {linksArray.map((link, idx) => {
-        if (idx === 0 ) {
-          return (
-            <p><strong><StyledAnchorTag href={link.slug}>{link.section}</StyledAnchorTag></strong></p>
-          )
-        } else {
+        } 
+        if (link.slug.includes('https')) {
           return (
             <p><StyledAnchorTag href={link.slug}>{link.section}</StyledAnchorTag></p>
           )
         }
+        return (
+          <p><StyledLink to={link.slug}>{link.section}</StyledLink></p>
+        )
       })}
     </Col>
   )
@@ -77,8 +69,8 @@ const Footer = () => (
         {FooterLinks(NewsLinks)}
         {FooterLinks(SportsLinks)}
         {FooterLinks(OpinionLinks)}
-        {FooterAnchorLinks(StreetLinks)}
-        {FooterAnchorLinks(UnderTheButtonLinks)}
+        {FooterLinks(StreetLinks)}
+        {FooterLinks(UnderTheButtonLinks)}
     </Row>
     <p style={{ textAlign: 'center', marginTop: '2em' }}> Copyright &copy; 2020 The Daily Pennsylvanian, Inc. All Rights Reserved.</p>
     <p style={{ textAlign: 'center' }}> Powered by <SNOImg src="https://d1q35ni5859stt.cloudfront.net/df6846ed8e0d185eefc430ebf9a8941a/dist/img/SNWorks.svg" /> Solutions by The State News. </p> 
