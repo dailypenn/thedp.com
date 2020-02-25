@@ -1,6 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `The Daily Pennsylvanian`,
+    description: `new website for the Daily Pennsylvanian`,
+    author: `@theDP Web Department 2020`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
