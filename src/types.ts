@@ -37,6 +37,7 @@ export interface IArticle {
     extension: string
     title: string
     content: string
+    created_at: string
   }
 }
 

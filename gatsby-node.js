@@ -9,6 +9,9 @@ const axios = require('axios')
 
 const BASE_URL = 'http://localhost:5000/fetch?url='
 const HomeTemplate = path.resolve('./src/templates/HomePage.tsx')
+const AuthorTemplate = path.resolve('./src/templates/Author.tsx')
+const ArticleTemplate = path.resolve('./src/templates/Article.tsx')
+
 
 // TODO: add action from create HomePage
 const createHomePage = async (createPage) => {
@@ -44,6 +47,8 @@ const createHomePage = async (createPage) => {
 // TODO: add action for creating article pages
 const createArticles = async (createPage) => {
   const newsResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
+  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
+
   newsResp.data.articles.forEach(article => {
     const { authors } = article
     authors.forEach(async author => await createAutors(createPage, author.slug))
@@ -51,7 +56,8 @@ const createArticles = async (createPage) => {
       path: article.slug,
       component: ArticleTemplate,
       context: {
-        article
+        article,
+        mostReadDP: mostReadDPResp.data.result.slice(0, 5)
       }
     })
   })
@@ -81,5 +87,6 @@ exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
   await createHomePage(createPage)
+  await createArticles(createPage)
   // await createArticles(createPage)
 }
