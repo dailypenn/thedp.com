@@ -1,24 +1,14 @@
 import React from 'react'
+import { Row, Col, Container, Image } from 'react-bootstrap'
+
 import { IArticle, IMostReadArticle } from '../types'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
-import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
 import RightCol from '../components/home/RightCol'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
-import { StyledLink } from '../components/shared'
-
-
-interface ISectionProps {
-  pageContext: {
-    filteredArticles: IArticle[]
-    mostReadDP: IMostReadArticle[]
-    section: string
-    topArticles: IArticle[]
-    centerpiece: IArticle
-  }
-}
+import { StyledLink } from '../components/shared'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -36,6 +26,16 @@ const Filler = s.div`
   height: 90px;
   background-color: #DFF3DB;
 `
+
+interface ISectionProps {
+  pageContext: {
+    filteredArticles: IArticle[]
+    mostReadDP: IMostReadArticle[]
+    section: string
+    topArticles: IArticle[]
+    centerpiece: IArticle
+  }
+}
 
 const Section = ({ pageContext: context }: ISectionProps ) => {
   const { filteredArticles, mostReadDP, section, topArticles, centerpiece } = context

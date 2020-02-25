@@ -52,7 +52,7 @@ const createSections = async (createPage, slug) => {
   const topResp = await axios.get(TOP_ARTICLES_API)
   const { articles } = sectionResp.data
   const { articles: topArticles } = topResp.data
-  
+
   let filteredArticles = []
   if (articles) {
     filteredArticles = articles.map(article => {
@@ -131,7 +131,7 @@ const createAuthors = async (createPage, slug) => {
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
-  await createSections(createPage, "news")
+  await createSections(createPage, 'news')
   await createHomePage(createPage)
   await createArticles(createPage)
 }
