@@ -33,6 +33,13 @@ const SNOImg = s.img`
   margin: 0 5px;
 `
 
+const Links = [
+  {
+    text: 'About',
+    slug: '/page/about',
+  }
+]
+
 const Footer = () => (
   <Wrapper>
     <LogoWrapper>
