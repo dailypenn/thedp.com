@@ -1,4 +1,5 @@
 import React from 'react'
+import s from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
 
 interface IMostReadCardProps {
@@ -6,11 +7,23 @@ interface IMostReadCardProps {
   content: string
 }
 
+const NumberCol = s(Col)`
+  color: #AA1E22;
+  font-size: 36px;
+`
+
+const Content = s.p`
+  font-size: 80%;
+`
+
+// TODO: Redefine font-sizes in ems
 export const MostReadCard = ({ idx, content }: IMostReadCardProps) => {
   return (
     <Row>
-      <Col xs={3} style={{ color: '#AA1E22', fontSize: '36px' }}> {idx} </Col>
-      <Col> <p dangerouslySetInnerHTML={{ __html: content }} style={{ fontSize: '80%' }} /> </Col>
+      <NumberCol xs={3}>{ idx }</NumberCol>
+      <Col>
+        <Content dangerouslySetInnerHTML={{ __html: content }} />
+      </Col>
     </Row>
   )
 }
