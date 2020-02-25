@@ -6,6 +6,8 @@ import Footer from '../components/Footer'
 import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
 import RightCol from '../components/home/RightCol'
+import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
+import { StyledLink } from '../components/shared'
 
 
 interface ISectionProps {
@@ -13,7 +15,8 @@ interface ISectionProps {
     filteredArticles: IArticle[]
     mostReadDP: IMostReadArticle[]
     section: string
-    sectionTop: IArticle[]
+    topArticles: IArticle[]
+    centerpiece: IArticle
   }
 }
 
@@ -35,26 +38,41 @@ const Filler = s.div`
 `
 
 const Section = ({ pageContext: context }: ISectionProps ) => {
-  const { filteredArticles, mostReadDP, section, sectionTop } = context
-  console.log(sectionTop)
+  const { filteredArticles, mostReadDP, section, topArticles, centerpiece } = context
+  const { dominantMedia, headline, abstract, slug, created_at } = centerpiece
+  const { attachment_uuid, extension } = dominantMedia
   return (
     <Layout>
       <SEO title="Section"/>
       <Container style={{ marginTop: '1.5em' }}>
-      <Row><SubHeader color={'black'}>{section}</SubHeader></Row>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
           <Col xs={9}>
+            <Row><SubHeader color={'black'}>{section.toUpperCase()}</SubHeader></Row>
             <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em' }}>
-              <Col>
-                <Row>
-                  SMALL ARTICLE 1
-                </Row>
-                <Row>
-                  SMALL ARTICLE 2
-                </Row>
+            <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
+                {topArticles.map(article => {
+                  const {
+                    dominantMedia: { attachment_uuid, extension },
+                    headline,
+                    slug,
+                    created_at
+                  } = article
+                  return (
+                    <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
+                      <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em', marginBottom: '1em', marginRight: '0.5em' }}>
+                        <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
+                        <strong>{headline}</strong>
+                      </Row>
+                    </StyledLink>
+                  )
+                })}
               </Col>
-              <Col xs={9}>
-                
+              <Col xs={8}>
+                <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
+                  <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
+                  <h4> {headline} </h4>
+                  <p dangerouslySetInnerHTML={{ __html: abstract }} />
+                </StyledLink>
               </Col>
             </Row>
             <Filler/>
@@ -63,12 +81,12 @@ const Section = ({ pageContext: context }: ISectionProps ) => {
             </Row>
               {filteredArticles.map((article, idx) => {
                   const { abstract, uuid, headline, dominantMedia } = article
-                  const { attachment_uuid } = dominantMedia
+                  const { attachment_uuid, extension } = dominantMedia
                   return (
                     <Row key={uuid} style = {{borderBottom: '1px solid #EBEBEB'}}>
                       <Col xs={4} style={{padding: '1em', margin: '1em'}}>
                         <Row>
-                        <Image fluid src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} />
+                        <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
                         </Row>
                       </Col>
                       <Col style={{padding: '1em', margin: '1em'}}>

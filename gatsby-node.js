@@ -11,6 +11,7 @@ const BASE_URL = 'http://localhost:5000/fetch?url='
 const HomeTemplate = path.resolve('./src/templates/HomePage.tsx')
 const AuthorTemplate = path.resolve('./src/templates/Author.tsx')
 const ArticleTemplate = path.resolve('./src/templates/Article.tsx')
+const SectionTemplate = path.resolve('./src/templates/Section.tsx')
 const {
   CENTERPIECE_API,
   TOP_ARTICLES_API,
@@ -46,11 +47,12 @@ const createHomePage = async (createPage) => {
 
 // TODO: add action for creating section pages]
 const createSections = async (createPage, slug) => {
-  const sectionResp = await axios.get(`${BASE_URL}https://www.thedp/section/${slug}.json`)
-  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
-  const sectionTop = await axios.get(`${BASE_URL}https://www.thedp.com/section/top.json`)
+  const sectionResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/${slug}.json`)
+  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
+  const topResp = await axios.get(TOP_ARTICLES_API)
   const { articles } = sectionResp.data
-  const section = slug
+  const { articles: topArticles } = topResp.data
+  
   let filteredArticles = []
   if (articles) {
     filteredArticles = articles.map(article => {
@@ -58,17 +60,20 @@ const createSections = async (createPage, slug) => {
       return article
     })
   }
+
   
   createPage({
     path: `section/${slug}`,
     component: SectionTemplate,
     context: {
       filteredArticles,
-      section,
-      sectionTop,
+      section: slug,
+      centerpiece: topArticles[0],
+      topArticles: topArticles.slice(1, 3),
       mostReadDP: mostReadDPResp.data.result.slice(0, 5),
     }
   })
+
 
 }
 
@@ -98,6 +103,8 @@ const createArticles = async (createPage) => {
   })
 }
 
+
+
 const createAuthors = async (createPage, slug) => {
   const resp = await axios.get(`${BASE_URL}https://www.thedp.com/staff/${slug}.json`)
   const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
@@ -124,6 +131,7 @@ const createAuthors = async (createPage, slug) => {
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
+  await createSections(createPage, "news")
   await createHomePage(createPage)
   await createArticles(createPage)
 }
