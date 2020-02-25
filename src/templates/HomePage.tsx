@@ -49,7 +49,7 @@ const Home = ({ pageContext: context }: IHomeProps) => {
   } = context
 
   const { dominantMedia, headline, abstract } = centerpieceData
-  const { content, attachment_uuid } = dominantMedia
+  const { content, attachment_uuid, extension } = dominantMedia
 
   return (
     <Layout>
@@ -61,17 +61,17 @@ const Home = ({ pageContext: context }: IHomeProps) => {
             <Row style={{ marginBottom: '1em', borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
               <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
                 {topData.map(article => {
-                  const { dominantMedia: { attachment_uuid }, headline } = article
+                  const { dominantMedia: { attachment_uuid, extension }, headline } = article
                   return (
                     <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em', marginBottom: '1em', marginRight: '0.5em' }}>
-                      <Image fluid src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} />
+                      <Image fluid src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.${extension}?w=1000`} />
                       <strong>{headline}</strong>
                     </Row>
                   )
                 })}
               </Col>
               <Col>
-                <Image src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} fluid />
+                <Image src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.${extension}?w=1000`} fluid />
                 <h4> {headline} </h4>
                 <p dangerouslySetInnerHTML={{ __html: abstract }} />
               </Col>
