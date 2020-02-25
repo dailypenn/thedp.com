@@ -1,4 +1,4 @@
-interface IAuthor {
+export interface IAuthor {
   id: string
   uuid: string
   name: string
