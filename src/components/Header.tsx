@@ -1,21 +1,18 @@
-import React, { useState } from "react"
-import s from "styled-components"
-import { Button, Nav, NavDropdown, Image, Row, Navbar } from "react-bootstrap"
-import Logo from '../images/icons/header-logo.svg'
-import FBLogo from '../images/icons/facebook.svg'
-import InstaLogo from '../images/icons/instagram.svg'
-import TwitLogo from '../images/icons/twitter.svg'
-import SearchIcon from '../images/icons/search.svg'
+import React, { useState } from 'react'
+import s from 'styled-components'
+import { Button, Nav, Row, Navbar } from 'react-bootstrap'
 
+import { WHITE, LIGHT_GRAY, GRAY, DP_RED, DP_DARK_RED } from '../styles/colors'
+import { LogoIcon, FBIcon, TwitterIcon, InstagramIcon, SearchIcon } from './shared'
 
 const TopRow = s(Row)`
   text-align: center;
   padding: 20px 0 10px;
-  background: #ffffff;
+  background: ${WHITE};
   justify-content: center;
 `
 
-const HeaderLogo = s(Logo)`
+const HeaderLogo = s(LogoIcon)`
   height: 60px;
   max-width: 100%;
   display: initial;
@@ -55,9 +52,9 @@ const NewsButton = s(Button)`
   font-weight: bold;
   font-size: 14px !important;
   padding: 3px 12px !important;
-  color: #fff !important;
-  background-color: #aa1e22 !important;
-  border-color: #941a1e !important;
+  color: ${WHITE} !important;
+  background-color: ${DP_RED} !important;
+  border-color: ${DP_DARK_RED} !important;
 `
 
 const DonateButton = s(Button)`
@@ -67,15 +64,15 @@ const DonateButton = s(Button)`
   font-weight: bold;
   font-size: 14px !important;
   padding: 3px 12px !important;
-  color: #aa1e22 !important;
-  background-color: #fff !important;
-  border-color: #941a1e !important;
+  color: ${DP_RED} !important;
+  background-color: ${WHITE} !important;
+  border-color: ${DP_DARK_RED} !important;
   border-width: 2px !important;
 `
 
 const HeaderNavbar = s(Navbar)`
-  border-top: 1px solid #A9A9A9;
-  border-bottom: 1px solid #A9A9A9;
+  border-top: 1px solid ${GRAY};
+  border-bottom: 1px solid ${GRAY};
   padding: 0 !important;
   width: 100%;
 `
@@ -87,7 +84,7 @@ const NavbarContainer = s.div`
 `
 
 const NavDate = s(Nav.Link)`
-  border-right: 2px solid #e7e7e7;
+  border-right: 2px solid ${LIGHT_GRAY};
   padding-right: 10px;
   color: black !important;
   font-family: "Heebo", sans-serif;
@@ -153,13 +150,13 @@ const Header = () => {
         </NavbarContainer>
         <SocialIcons>
           <IconWrapper>
-            <FBLogo style={{ width: '20px' }} />
+            <FBIcon style={{ width: '20px' }} />
           </IconWrapper>
           <IconWrapper>
-            <TwitLogo style={{ width: '20px' }} />
+            <TwitterIcon style={{ width: '20px' }} />
           </IconWrapper>
           <IconWrapper>
-            <InstaLogo style={{ width: '20px' }} />
+            <InstagramIcon style={{ width: '20px' }} />
           </IconWrapper>
         </SocialIcons>
       </HeaderNavbar>
