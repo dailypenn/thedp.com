@@ -41,7 +41,33 @@ const createHomePage = async (createPage) => {
   })
 }
 
-// TODO: add action for creating section pages
+// TODO: add action for creating section pages]
+const createSections = async (createPage, slug) => {
+  const sectionResp = await axios.get(`${BASE_URL}https://www.thedp/section/${slug}.json`)
+  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
+  const sectionTop = await axios.get(`${BASE_URL}https://www.thedp.com/section/top.json`)
+  const { articles } = sectionResp.data
+  const section = slug
+  let filteredArticles = []
+  if (articles) {
+    filteredArticles = articles.map(article => {
+      delete article.content
+      return article
+    })
+  }
+  
+  createPage({
+    path: `section/${slug}`,
+    component: SectionTemplate,
+    context: {
+      filteredArticles,
+      section,
+      sectionTop,
+      mostReadDP: mostReadDPResp.data.result.slice(0, 5),
+    }
+  })
+
+}
 
 // TODO: add action for creating article pages
 const createArticles = async (createPage) => {
