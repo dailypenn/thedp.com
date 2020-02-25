@@ -6,7 +6,7 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
 
-import { MostReadCard } from '../components/shared'
+import { Filler } from '../components/shared'
 import RightCol from '../components/home/RightCol'
 import { IArticle, IAuthor, IMostReadArticle } from '../types'
 
@@ -17,14 +17,6 @@ const SubHeader = s.h3`
   line-height: 1.0;
   margin: 0.5em 0;
   color: ${({ color }) => color};
-`
-
-const Filler = s.div`
-  margin-top: 1em;
-  margin-right: 1em;
-  margin-bottom: 1em;
-  height: 90px;
-  background-color: #DFF3DB;
 `
 
 interface IAuthorProps {
@@ -48,7 +40,7 @@ const Author = ({ pageContext: context }: IAuthorProps) => {
             <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em' }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </Row>
-            <Filler/>
+            <Filler color="#DFF3DB"/>
             <Row>
               <SubHeader color={'black'}>Most Recent</SubHeader>
             </Row>
@@ -71,10 +63,9 @@ const Author = ({ pageContext: context }: IAuthorProps) => {
                     </Row>
                   )
               })}
-              <Filler/>
+              <Filler color="#DFF3DB"/>
           </Col>
           <RightCol mostReadDP={mostReadDP} />
-          
         </Row>
       </Container>
       <Footer />

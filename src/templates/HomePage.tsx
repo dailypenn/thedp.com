@@ -1,7 +1,6 @@
 import React from 'react'
 import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
-import { Link } from 'gatsby'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -9,7 +8,7 @@ import Footer from '../components/Footer'
 import RightCol from '../components/Home/RightCol'
 import { IArticle, IMostReadArticle } from '../types'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
-import { StyledLink } from '../components/shared'
+import { StyledLink, Filler } from '../components/shared'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -17,14 +16,6 @@ const SubHeader = s.h3`
   font-weight: 700;
   line-height: 1.0;
   margin: 0.5em 0;
-`
-
-const Filler = s.div`
-  margin-top: 1em;
-  margin-right: 1em;
-  margin-bottom: 1em;
-  height: 90px;
-  background-color: #DFF3DB;
 `
 
 const Line = s(Row)`
@@ -89,7 +80,7 @@ const Home = ({ pageContext: context }: IHomeProps) => {
               </Col>
             </Row>
             <SubHeader> TRENDING </SubHeader>
-            <Filler />
+            <Filler color="#DFF3DB"/>
             <Line />
             <SubHeader> FROM 34TH STREET </SubHeader>
             <p style={{ fontStyle: 'italic' }}> The DP&#39;s arts and culture magazine </p>
