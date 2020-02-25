@@ -46,6 +46,8 @@ const createHomePage = async (createPage) => {
 // TODO: add action for creating article pages
 const createArticles = async (createPage) => {
   const newsResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
+  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
+
   newsResp.data.articles.forEach(article => {
     const { authors } = article
     authors.forEach(async author => await createAuthors(createPage, author.slug))
@@ -53,7 +55,8 @@ const createArticles = async (createPage) => {
       path: article.slug,
       component: ArticleTemplate,
       context: {
-        article
+        article,
+        mostReadDP: mostReadDPResp.data.result.slice(0, 5)
       }
     })
   })
