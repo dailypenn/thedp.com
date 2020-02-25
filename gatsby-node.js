@@ -11,18 +11,21 @@ const BASE_URL = 'http://localhost:5000/fetch?url='
 const HomeTemplate = path.resolve('./src/templates/HomePage.tsx')
 const AuthorTemplate = path.resolve('./src/templates/Author.tsx')
 const ArticleTemplate = path.resolve('./src/templates/Article.tsx')
+const {
+  CENTERPIECE_API,
+  TOP_ARTICLES_API,
+  MOST_READ_DP_API,
+  MOST_READ_UTB_API,
+  MOST_READ_34_API,
+} = require('./src/constants/api.ts')
 
 // TODO: add action from create HomePage
 const createHomePage = async (createPage) => {
-  const resp = await axios.get(`${BASE_URL}http://www.thedp.com/section/centerpiece.json`)
-
-  const topResp = await axios.get(`${BASE_URL}http://www.thedp.com/section/top.json`)
-
-  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
-
-  const most34Resp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/34ST`)
-
-  const mostUTBResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/UTB`)
+  const resp = await axios.get(CENTERPIECE_API)
+  const topResp = await axios.get(TOP_ARTICLES_API)
+  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
+  const most34Resp = await axios.get(MOST_READ_34_API)
+  const mostUTBResp = await axios.get(MOST_READ_UTB_API)
 
   const { articles } = resp.data
 
@@ -69,16 +72,23 @@ const createSections = async (createPage, slug) => {
 
 }
 
+const generateSlug = (slug, created_at) => {
+  const firstIndex = created_at.indexOf('-')
+  const year = created_at.substring(0, firstIndex)
+  const month = created_at.substring(firstIndex + 1, created_at.indexOf('-', firstIndex + 1))
+  return `${year}/${month}/${slug}`
+}
+
 // TODO: add action for creating article pages
 const createArticles = async (createPage) => {
   const newsResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
   const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
 
   newsResp.data.articles.forEach(article => {
-    const { authors } = article
+    const { authors, created_at, slug } = article
     authors.forEach(async author => await createAuthors(createPage, author.slug))
     createPage({
-      path: article.slug,
+      path: `/article/${generateSlug(slug, created_at)}`,
       component: ArticleTemplate,
       context: {
         article,
