@@ -32,7 +32,11 @@ const SNOImg = s.img`
   margin: 0 5px;
 `
 
-const FooterLinks = (linksArray: ILink[]) => {
+interface IFooterLinksProps {
+  linksArray: ILink[]
+}
+
+const FooterLinks: React.FC<IFooterLinksProps> = ({ linksArray }) => {
   return (
     <Col>
       {linksArray.map((link, idx) => {
@@ -65,12 +69,12 @@ const Footer = () => (
       <Image fluid src="https://d1q35ni5859stt.cloudfront.net/df6846ed8e0d185eefc430ebf9a8941a/dist/img/logo.svg" />
     </LogoWrapper>
     <Row>
-        {FooterLinks(AboutLinks)}
-        {FooterLinks(NewsLinks)}
-        {FooterLinks(SportsLinks)}
-        {FooterLinks(OpinionLinks)}
-        {FooterLinks(StreetLinks)}
-        {FooterLinks(UnderTheButtonLinks)}
+        <FooterLinks linksArray={AboutLinks}/>
+        <FooterLinks linksArray={NewsLinks}/>
+        <FooterLinks linksArray={SportsLinks}/>
+        <FooterLinks linksArray={OpinionLinks}/>
+        <FooterLinks linksArray={StreetLinks}/>
+        <FooterLinks linksArray={UnderTheButtonLinks}/>
     </Row>
     <p style={{ textAlign: 'center', marginTop: '2em' }}> Copyright &copy; 2020 The Daily Pennsylvanian, Inc. All Rights Reserved.</p>
     <p style={{ textAlign: 'center' }}> Powered by <SNOImg src="https://d1q35ni5859stt.cloudfront.net/df6846ed8e0d185eefc430ebf9a8941a/dist/img/SNWorks.svg" /> Solutions by The State News. </p> 

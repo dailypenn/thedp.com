@@ -233,3 +233,5 @@ export const UnderTheButtonLinks: ILink[] = [
     slug: 'https://projects.underthebutton.com/',
   },
 ]
+
+// export const SectionLinks = [AboutLinks, NewsLinks, SportsLinks, OpinionLinks, StreetLinks, UnderTheButtonLinks]
