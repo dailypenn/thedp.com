@@ -84,8 +84,8 @@ export const NewsLinks: ILink[] = [
     slug: '/section/student-life',
   },
   {
-    section: 'Tech',
-    slug: '/section/tech',
+    section: 'Gender & Diversity',
+    slug: '/section/gender-diversity',
   },
 ]
 
@@ -201,12 +201,12 @@ export const StreetLinks: ILink[] = [
     slug: 'www.34st.com/section/style',
   },
   {
-    section: 'Lastpage',
-    slug: 'www.34st.com/section/lastpage',
+    section: 'Overheads',
+    slug: 'www.34st.com/section/overheads',
   },
   {
-    section: 'Multimedia',
-    slug: 'www.34st.com/multimedia',
+    section: 'Visual Stories',
+    slug: 'www.34st.com/section/visualstories',
   },
   {
     section: 'Projects',
