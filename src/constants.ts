@@ -170,69 +170,69 @@ export const OpinionLinks: ILink[] = [
 export const StreetLinks: ILink[] = [
   {
     section: '34th Street',
-    slug: 'www.34st.com',
+    slug: 'https://www.34st.com',
   },
   {
     section: 'Features',
-    slug: 'www.34st.com/section/features',
+    slug: 'https://www.34st.com/section/features',
   },
   {
     section: 'Ego',
-    slug: 'www.34st.com/section/ego',
+    slug: 'https://www.34st.com/section/ego',
   },
   {
     section: 'Word on the Street',
-    slug: 'www.34st.com/section/word-on-the-street',
+    slug: 'https://www.34st.com/section/word-on-the-street',
   },
   {
     section: 'Film & TV',
-    slug: 'www.34st.com/section/film',
+    slug: 'https://www.34st.com/section/film',
   },
   {
     section: 'Music',
-    slug: 'www.34st.com/section/music',
+    slug: 'https://www.34st.com/section/music',
   },
   {
     section: 'Arts',
-    slug: 'www.34st.com/section/arts',
+    slug: 'https://www.34st.com/section/arts',
   },
   {
     section: 'Style',
-    slug: 'www.34st.com/section/style',
+    slug: 'https://www.34st.com/section/style',
   },
   {
     section: 'Overheads',
-    slug: 'www.34st.com/section/overheads',
+    slug: 'https://www.34st.com/section/overheads',
   },
   {
     section: 'Visual Stories',
-    slug: 'www.34st.com/section/visualstories',
+    slug: 'https://www.34st.com/section/visualstories',
   },
   {
     section: 'Projects',
-    slug: 'projects.34st.com',
+    slug: 'https://projects.34st.com',
   },
 ]
 
 export const UnderTheButtonLinks: ILink[] = [
   {
     section: 'Under the Button',
-    slug: 'www.underthebutton.com',
+    slug: 'https://www.underthebutton.com/',
   },
   {
     section: 'News',
-    slug: 'www.underthebutton.com/section/news',
+    slug: 'https://www.underthebutton.com/section/news',
   },
   {
     section: 'Opinion',
-    slug: 'www.underthebutton.com/section/opinion',
+    slug: 'https://www.underthebutton.com/section/opinion',
   },
   {
     section: 'Video',
-    slug: 'www.underthebutton.com/section/video',
+    slug: 'https://www.underthebutton.com/section/video',
   },
   {
     section: 'Projects',
-    slug: 'projects.underthebutton.com',
+    slug: 'https://projects.underthebutton.com/',
   },
 ]

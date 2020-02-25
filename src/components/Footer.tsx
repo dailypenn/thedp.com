@@ -1,18 +1,16 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { Row, Col, Image } from 'react-bootstrap'
 import s from 'styled-components'
-import { AboutLinks, NewsLinks, SportsLinks, OpinionLinks, StreetLinks, UnderTheButtonLinks } from '../constants'
 
-const StyledLink = s(Link)`
-  color: #000000 !important;
-  text-decoration: none !important;
-`
-
-const StyledNonSlug = s.a`
-  color: #000000 !important;
-  text-decoration: none !important;
-`
+import {
+  AboutLinks,
+  NewsLinks,
+  SportsLinks,
+  OpinionLinks,
+  StreetLinks,
+  UnderTheButtonLinks
+} from '../constants'
+import { StyledLink, StyledAnchorTag } from '../components/shared'
 
 const Wrapper = s.div`
   padding: 0 10em;
@@ -33,12 +31,41 @@ const SNOImg = s.img`
   margin: 0 5px;
 `
 
-const Links = [
-  {
-    text: 'About',
-    slug: '/page/about',
-  }
-]
+const FooterLinks = linksArray => {
+  return (
+    <Col>
+      {linksArray.map((link, idx) => {
+        if (idx === 0 ) {
+          return (
+            <p><strong><StyledLink to={link.slug}>{link.section}</StyledLink></strong></p>
+          )
+        } else {
+          return (
+            <p><StyledLink to={link.slug}>{link.section}</StyledLink></p>
+          )
+        }
+      })}
+    </Col>
+  )
+}
+
+const FooterAnchorLinks = linksArray => {
+  return (
+    <Col>
+      {linksArray.map((link, idx) => {
+        if (idx === 0 ) {
+          return (
+            <p><strong><StyledAnchorTag href={link.slug}>{link.section}</StyledAnchorTag></strong></p>
+          )
+        } else {
+          return (
+            <p><StyledAnchorTag href={link.slug}>{link.section}</StyledAnchorTag></p>
+          )
+        }
+      })}
+    </Col>
+  )
+}
 
 const Footer = () => (
   <Wrapper>
@@ -46,84 +73,12 @@ const Footer = () => (
       <Image fluid src="https://d1q35ni5859stt.cloudfront.net/df6846ed8e0d185eefc430ebf9a8941a/dist/img/logo.svg" />
     </LogoWrapper>
     <Row>
-      <Col>
-        {AboutLinks.map((link, idx) => {
-          if (idx === 0 ) {
-            return (
-              <p><strong><StyledLink to={link.slug}>{link.section}</StyledLink></strong></p>
-            )
-          } else {
-            return (
-              <p><StyledLink to={link.slug}>{link.section}</StyledLink></p>
-            )
-          }
-        })}
-      </Col>
-      <Col>
-        {NewsLinks.map((link, idx) => {
-          if (idx === 0 ) {
-            return (
-              <p><strong><StyledLink to={link.slug}>{link.section}</StyledLink></strong></p>
-            )
-          } else {
-            return (
-              <p><StyledLink to={link.slug}>{link.section}</StyledLink></p>
-            )
-          }
-        })}
-      </Col>
-      <Col>
-        {SportsLinks.map((link, idx) => {
-          if (idx === 0 ) {
-            return (
-              <p><strong><StyledLink to={link.slug}>{link.section}</StyledLink></strong></p>
-            )
-          } else {
-            return (
-              <p><StyledLink to={link.slug}>{link.section}</StyledLink></p>
-            )
-          }
-        })}
-      </Col>
-      <Col>
-        {OpinionLinks.map((link, idx) => {
-          if (idx === 0 ) {
-            return (
-              <p><strong><StyledLink to={link.slug}>{link.section}</StyledLink></strong></p>
-            )
-          } else {
-            return (
-              <p><StyledLink to={link.slug}>{link.section}</StyledLink></p>
-            )
-          }
-        })}
-      </Col>
-      <Col>
-        {StreetLinks.map((link, idx) => {
-          if (idx === 0 ) {
-            return (
-              <p><strong><StyledNonSlug href={link.slug}>{link.section}</StyledNonSlug></strong></p>
-            )
-          } else {
-            return (
-              <p><StyledNonSlug href={link.slug}>{link.section}</StyledNonSlug></p>
-            )
-          }
-        })}
-      </Col>
-      <Col>
-        {UnderTheButtonLinks.map((link, idx) => {
-          if (idx === 0 ) {
-            return (
-              <p><strong><StyledNonSlug href={link.slug}>{link.section}</StyledNonSlug></strong></p>
-            )
-          } else {
-            return (
-              <p><StyledNonSlug href={link.slug}>{link.section}</StyledNonSlug></p>
-            )
-          }
-        })}
-      </Col>
+        {FooterLinks(AboutLinks)}
+        {FooterLinks(NewsLinks)}
+        {FooterLinks(SportsLinks)}
+        {FooterLinks(OpinionLinks)}
+        {FooterAnchorLinks(StreetLinks)}
+        {FooterAnchorLinks(UnderTheButtonLinks)}
     </Row>
     <p style={{ textAlign: 'center', marginTop: '2em' }}> Copyright &copy; 2020 The Daily Pennsylvanian, Inc. All Rights Reserved.</p>
     <p style={{ textAlign: 'center' }}> Powered by <SNOImg src="https://d1q35ni5859stt.cloudfront.net/df6846ed8e0d185eefc430ebf9a8941a/dist/img/SNWorks.svg" /> Solutions by The State News. </p> 
