@@ -8,7 +8,8 @@ import Footer from '../components/Footer'
 import s from 'styled-components'
 import RightCol from '../components/home/RightCol'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
-import { StyledLink } from '../components/shared'
+import { StyledLink, Filler } from '../components/shared'
+
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -17,14 +18,6 @@ const SubHeader = s.h3`
   line-height: 1.0;
   margin: 0.5em 0;
   color: ${({ color }) => color};
-`
-
-const Filler = s.div`
-  margin-top: 1em;
-  margin-right: 1em;
-  margin-bottom: 1em;
-  height: 90px;
-  background-color: #DFF3DB;
 `
 
 interface ISectionProps {
@@ -47,7 +40,7 @@ const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {
       <Container style={{ marginTop: '1.5em' }}>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
           <Col xs={9}>
-            <Row><SubHeader color={'black'}>{section.toUpperCase()}</SubHeader></Row>
+            <Row><SubHeader color='black'>{section.toUpperCase()}</SubHeader></Row>
             <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em' }}>
             <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
                 {topArticles.map(article => {
