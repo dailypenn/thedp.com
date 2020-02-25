@@ -1,10 +1,12 @@
 import React from 'react'
 import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
+
 import RightCol from '../components/home/RightCol'
 import Layout from '../components/layout'
 import Footer from '../components/Footer'
 import { IArticle, IMostReadArticle } from '../types'
+import { IMAGE_URL } from '../utils/helperFunctions'
 
 const SubHeader = s.h3`
   color: #black;
@@ -49,7 +51,7 @@ const Article = ({ pageContext: context }: IArticleProps ) => {
   const { article, mostReadDP } = context
   const { authors, dominantMedia, headline, abstract, content } = article
   const { name } = authors[0]
-  const { attachment_uuid, created_at} = dominantMedia
+  const { attachment_uuid, created_at, extension } = dominantMedia
 
   return (
     <Layout>
@@ -61,7 +63,7 @@ const Article = ({ pageContext: context }: IArticleProps ) => {
             <AuthorName>By {name}</AuthorName>
             <p>{created_at}</p>
             <Filler color={'#DFF3DB'}/>
-              <Image src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.jpg?w=1000`} fluid />
+              <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
               <p dangerouslySetInnerHTML={{ __html: content }} />
               <SubHeader style={{ color: '#AA1E22' }}> READ MORE </SubHeader>
             <Line /> 
