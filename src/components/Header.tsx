@@ -1,14 +1,9 @@
-import React, { useState } from "react"
-import s from "styled-components"
-import { Button, Nav, Row, Navbar } from "react-bootstrap"
+import React, { useState } from 'react'
+import s from 'styled-components'
+import { Button, Nav, Row, Navbar } from 'react-bootstrap'
 
 import { WHITE, LIGHT_GRAY, GRAY, DP_RED, DP_DARK_RED } from '../styles/colors'
-import Logo from '../images/icons/header-logo.svg'
-import FBLogo from '../images/icons/facebook.svg'
-import InstaLogo from '../images/icons/instagram.svg'
-import TwitLogo from '../images/icons/twitter.svg'
-import SearchIcon from '../images/icons/search.svg'
-
+import { LogoIcon, FBIcon, TwitterIcon, InstagramIcon, SearchIcon } from './shared'
 
 const TopRow = s(Row)`
   text-align: center;
@@ -17,7 +12,7 @@ const TopRow = s(Row)`
   justify-content: center;
 `
 
-const HeaderLogo = s(Logo)`
+const HeaderLogo = s(LogoIcon)`
   height: 60px;
   max-width: 100%;
   display: initial;
@@ -155,13 +150,13 @@ const Header = () => {
         </NavbarContainer>
         <SocialIcons>
           <IconWrapper>
-            <FBLogo style={{ width: '20px' }} />
+            <FBIcon style={{ width: '20px' }} />
           </IconWrapper>
           <IconWrapper>
-            <TwitLogo style={{ width: '20px' }} />
+            <TwitterIcon style={{ width: '20px' }} />
           </IconWrapper>
           <IconWrapper>
-            <InstaLogo style={{ width: '20px' }} />
+            <InstagramIcon style={{ width: '20px' }} />
           </IconWrapper>
         </SocialIcons>
       </HeaderNavbar>
