@@ -37,7 +37,7 @@ interface ISectionProps {
   }
 }
 
-const Section = ({ pageContext: context }: ISectionProps ) => {
+const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {  
   const { filteredArticles, mostReadDP, section, topArticles, centerpiece } = context
   const { dominantMedia, headline, abstract, slug, created_at } = centerpiece
   const { attachment_uuid, extension } = dominantMedia
