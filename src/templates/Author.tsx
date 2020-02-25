@@ -16,6 +16,7 @@ const SubHeader = s.h3`
   font-weight: 700;
   line-height: 1.0;
   margin: 0.5em 0;
+  color: ${({ color }) => color};
 `
 
 const Filler = s.div`
@@ -35,7 +36,6 @@ interface IAuthorProps {
 }
 
 const Author = ({ pageContext: context }: IAuthorProps) => {
-  console.log(context)
   const { filteredArticles, author, mostReadDP } = context
 
   return (
@@ -44,15 +44,13 @@ const Author = ({ pageContext: context }: IAuthorProps) => {
       <Container style={{ marginTop: '1.5em' }}>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
           <Col xs={9}>
-            <Row><h4>{author.name}</h4></Row>
+            <Row><SubHeader color={'black'}>{author.name}</SubHeader></Row>
             <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em' }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </Row>
-            <Filler>
-              Adssss
-            </Filler>
+            <Filler/>
             <Row>
-              <h4>Most Recent</h4>
+              <SubHeader color={'black'}>Most Recent</SubHeader>
             </Row>
               {filteredArticles.map((article, idx) => {
                   const { dominantMedia, headline, abstract, uuid } = article
