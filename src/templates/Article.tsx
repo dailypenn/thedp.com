@@ -7,6 +7,7 @@ import Layout from '../components/layout'
 import Footer from '../components/Footer'
 import { IArticle, IMostReadArticle } from '../types'
 import { IMAGE_URL } from '../utils/helperFunctions'
+import { Filler } from '../components/shared'
 
 const SubHeader = s.h3`
   color: #black;
@@ -23,16 +24,6 @@ const AuthorName = s.h3`
   font-family: Heebo;
   font-style: normal;
   font-weight: bold;
-`
-
-const Filler = s.div`
-  margin-top: 1em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-bottom: 2em;
-  height: 90px;
-  align: center;
-  background-color: ${({ color }) => color};
 `
 
 const Line = s(Row)`

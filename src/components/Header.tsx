@@ -2,8 +2,21 @@ import React, { useState } from 'react'
 import s from 'styled-components'
 import { Button, Nav, Row, Navbar } from 'react-bootstrap'
 
-import { WHITE, LIGHT_GRAY, GRAY, DP_RED, DP_DARK_RED } from '../styles/colors'
-import { LogoIcon, FBIcon, TwitterIcon, InstagramIcon, SearchIcon } from './shared'
+import {
+  WHITE,
+  LIGHT_GRAY,
+  GRAY,
+  DP_RED,
+  DP_DARK_RED
+} from '../styles/colors'
+import {
+  LogoIcon,
+  FBIcon,
+  TwitterIcon,
+  InstagramIcon,
+  SearchIcon,
+  StyledLink
+} from './shared'
 
 const TopRow = s(Row)`
   text-align: center;
@@ -112,12 +125,14 @@ const Header = () => {
   return (
     <header>
       <TopRow className="hidden-xs">
-        <HeaderLogoWrapper>
-          <HeaderLogo />
-          <HeaderLogoText>
-            Founded in 1885
-          </HeaderLogoText>
-        </HeaderLogoWrapper>
+        <StyledLink to="/">
+          <HeaderLogoWrapper>
+            <HeaderLogo />
+            <HeaderLogoText>
+              Founded in 1885
+            </HeaderLogoText>
+          </HeaderLogoWrapper>
+        </StyledLink>
         <ButtonWrapper1>
           <NewsButton variant="primary" size="sm">
             NEWSLETTERS
