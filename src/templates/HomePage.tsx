@@ -1,12 +1,15 @@
 import React from 'react'
 import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
+import { Link } from 'gatsby'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
 import RightCol from '../components/Home/RightCol'
 import { IArticle, IMostReadArticle } from '../types'
+import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
+import { StyledLink } from '../components/shared'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -48,7 +51,7 @@ const Home = ({ pageContext: context }: IHomeProps) => {
     mostReadUTB
   } = context
 
-  const { dominantMedia, headline, abstract } = centerpieceData
+  const { dominantMedia, headline, abstract, slug, created_at } = centerpieceData
   const { content, attachment_uuid, extension } = dominantMedia
 
   return (
@@ -61,19 +64,28 @@ const Home = ({ pageContext: context }: IHomeProps) => {
             <Row style={{ marginBottom: '1em', borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
               <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
                 {topData.map(article => {
-                  const { dominantMedia: { attachment_uuid, extension }, headline } = article
+                  const {
+                    dominantMedia: { attachment_uuid, extension },
+                    headline,
+                    slug,
+                    created_at
+                  } = article
                   return (
-                    <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em', marginBottom: '1em', marginRight: '0.5em' }}>
-                      <Image fluid src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.${extension}?w=1000`} />
-                      <strong>{headline}</strong>
-                    </Row>
+                    <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
+                      <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em', marginBottom: '1em', marginRight: '0.5em' }}>
+                        <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
+                        <strong>{headline}</strong>
+                      </Row>
+                    </StyledLink>
                   )
                 })}
               </Col>
               <Col>
-                <Image src={`https://snworksceo.imgix.net/dpn/${attachment_uuid}.sized-1000x1000.${extension}?w=1000`} fluid />
-                <h4> {headline} </h4>
-                <p dangerouslySetInnerHTML={{ __html: abstract }} />
+                <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
+                  <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
+                  <h4> {headline} </h4>
+                  <p dangerouslySetInnerHTML={{ __html: abstract }} />
+                </StyledLink>
               </Col>
             </Row>
             <SubHeader> TRENDING </SubHeader>
