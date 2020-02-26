@@ -22,9 +22,9 @@ const RightCol = ({ mostReadDP }: IRightColProps): React.ReactElement => (
     <SubHeader style={{ color: '#AA1E22' }}> MOST READ </SubHeader>
     <Card>
       <ListGroup>
-        {mostReadDP.map((article, idx) => (
-            <ListGroup.Item>
-              <MostReadCard idx={idx + 1} content={article.ogTitle} />
+        {mostReadDP.map(({ ogTitle }, idx) => (
+            <ListGroup.Item key={ogTitle} >
+              <MostReadCard idx={idx + 1} content={ogTitle} />
             </ListGroup.Item>
           ))}
       </ListGroup>
