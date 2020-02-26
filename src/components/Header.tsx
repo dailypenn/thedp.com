@@ -118,11 +118,7 @@ const IconWrapper = s.a`
 `
 
 // TODO: Make mcModal trigger a modal
-const Header = () => {
-  const [search, setSearch] = useState(false)
-  const toggleSearch = () => setSearch(!search)
-
-  return (
+const Header = (): React.ReactElement => (
     <header>
       <TopRow className="hidden-xs">
         <StyledLink to="/">
@@ -177,7 +173,6 @@ const Header = () => {
       </HeaderNavbar>
     </header>
   )
-}
 
 
 export default Header

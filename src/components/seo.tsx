@@ -16,7 +16,7 @@ interface ISEOProps {
   title: string
 }
 
-const SEO = ({ description, lang, meta, title }: ISEOProps) => {
+const SEO = ({ description, lang, meta, title }: ISEOProps): React.ReactElement => {
   const { site } = useStaticQuery(
     graphql`
       query {
