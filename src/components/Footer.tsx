@@ -38,30 +38,30 @@ interface IFooterLinksProps {
 
 const FooterLinks: React.FC<IFooterLinksProps> = ({ linksArray }) => (
     <Col>
-      {linksArray.map((link, idx) => {
+      {linksArray.map(({ slug, section }, idx) => {
         if (idx === 0) {
-          if (link.slug.includes('https')) {
+          if (slug.includes('https')) {
             return (
-              <p><strong><StyledAnchorTag href={link.slug}>{link.section}</StyledAnchorTag></strong></p>
+              <p><strong><StyledAnchorTag key={slug} href={slug}>{section}</StyledAnchorTag></strong></p>
             )
           }
           return (
-            <p><strong><StyledLink to={link.slug}>{link.section}</StyledLink></strong></p>
+            <p><strong><StyledLink key={slug} to={slug}>{section}</StyledLink></strong></p>
           )
         }
-        if (link.slug.includes('https')) {
+        if (slug.includes('https')) {
           return (
-            <p><StyledAnchorTag href={link.slug}>{link.section}</StyledAnchorTag></p>
+            <p><StyledAnchorTag key={slug} href={slug}>{section}</StyledAnchorTag></p>
           )
         }
         return (
-          <p><StyledLink to={link.slug}>{link.section}</StyledLink></p>
+          <p><StyledLink key={slug} to={slug}>{section}</StyledLink></p>
         )
       })}
     </Col>
   )
 
-const Footer = () => (
+const Footer = (): React.ReactElement => (
   <Wrapper>
     <LogoWrapper>
       <Image fluid src="https://d1q35ni5859stt.cloudfront.net/df6846ed8e0d185eefc430ebf9a8941a/dist/img/logo.svg" />
