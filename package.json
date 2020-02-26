@@ -52,7 +52,9 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "lint": "eslint 'src/**/*.{ts,js,tsx,jsx}'",
+    "lint-fix": "eslint 'src/**/*.{ts,js,tsx,jsx}' --fix"
   },
   "repository": {
     "type": "git",
