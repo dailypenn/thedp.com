@@ -17,7 +17,7 @@ interface IRightColProps {
   mostReadDP: IMostReadArticle[]
 }
 
-const RightCol = ({ mostReadDP }: IRightColProps) => (
+const RightCol = ({ mostReadDP }: IRightColProps): React.ReactElement => (
   <Col xs={3} style={{ borderLeft: '1px solid #EBEBEB' }}>
     <SubHeader style={{ color: '#AA1E22' }}> MOST READ </SubHeader>
     <Card>

@@ -27,7 +27,7 @@ interface IAuthorProps {
   }
 }
 
-const Author = ({ pageContext: context }: IAuthorProps) => {
+const Author = ({ pageContext: context }: IAuthorProps): React.ReactElement => {
   const { filteredArticles, author, mostReadDP } = context
 
   return (
@@ -44,7 +44,7 @@ const Author = ({ pageContext: context }: IAuthorProps) => {
             <Row>
               <SubHeader color={'black'}>Most Recent</SubHeader>
             </Row>
-              {filteredArticles.map((article, idx) => {
+              {filteredArticles.map(article => {
                   const { dominantMedia, headline, abstract, uuid } = article
                   const { attachment_uuid } = dominantMedia
                   return (
