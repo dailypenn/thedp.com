@@ -33,10 +33,13 @@ interface IHomeProps {
   }
 }
 
-const Home = ({ pageContext: context }: IHomeProps): React.ReactElement => {
-  const {
+const Home = ({
+  pageContext: {
     centerpiece: {
-      dominantMedia,
+      dominantMedia: {
+        attachment_uuid,
+        extension
+      },
       headline,
       abstract,
       slug,
@@ -46,11 +49,8 @@ const Home = ({ pageContext: context }: IHomeProps): React.ReactElement => {
     mostReadDP,
     mostRead34,
     mostReadUTB
-  } = context
-
-  const { attachment_uuid, extension } = dominantMedia
-
-  return (
+  }
+}: IHomeProps): React.ReactElement => (
     <Layout>
       <SEO title="Home" />
       <Container style={{ marginTop: '1.5em' }}>
@@ -128,7 +128,6 @@ const Home = ({ pageContext: context }: IHomeProps): React.ReactElement => {
       </Container>
       <Footer />
     </Layout>
-  )
-}
+)
 
 export default Home

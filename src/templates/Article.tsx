@@ -38,13 +38,22 @@ interface IArticleProps {
   }
 }
 
-const Article = ({ pageContext: context }: IArticleProps ) => {
-  const { article, mostReadDP } = context
-  const { authors, dominantMedia, headline, abstract, content } = article
-  const { name } = authors[0]
-  const { attachment_uuid, created_at, extension } = dominantMedia
-
-  return (
+const Article = ({
+  pageContext: {
+    article: {
+      authors: [{ name }],
+      dominantMedia: {
+        attachment_uuid,
+        created_at,
+        extension
+      },
+      headline,
+      abstract,
+      content
+    },
+    mostReadDP
+  }
+}: IArticleProps ): React.ReactElement => (
     <Layout>
       <Container style={{ marginTop: '1.5em' }}>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
@@ -78,7 +87,6 @@ const Article = ({ pageContext: context }: IArticleProps ) => {
       </Container>
       <Footer />
     </Layout>
-  )
-}
+)
 
 export default Article
