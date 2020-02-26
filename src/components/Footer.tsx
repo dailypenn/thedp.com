@@ -32,32 +32,40 @@ const SNOImg = s.img`
   margin: 0 5px;
 `
 
+interface IFooterLinkProps {
+  idx: number,
+  slug: string,
+  section: string
+}
+
+const FooterLink: React.FC<IFooterLinkProps> = ({ slug, section, idx }) => {
+  if (idx === 0) {
+    if (slug.includes('https')) {
+      return (
+        <p><strong><StyledAnchorTag key={slug} href={slug}>{section}</StyledAnchorTag></strong></p>
+      )
+    }
+    return (
+      <p><strong><StyledLink key={slug} to={slug}>{section}</StyledLink></strong></p>
+    )
+  }
+  if (slug.includes('https')) {
+    return (
+      <p><StyledAnchorTag key={slug} href={slug}>{section}</StyledAnchorTag></p>
+    )
+  }
+  return (
+    <p><StyledLink key={slug} to={slug}>{section}</StyledLink></p>
+  )
+}
+
 interface IFooterLinksProps {
   linksArray: ILink[]
 }
 
 const FooterLinks: React.FC<IFooterLinksProps> = ({ linksArray }) => (
-    <Col>
-      {linksArray.map(({ slug, section }, idx) => {
-        if (idx === 0) {
-          if (slug.includes('https')) {
-            return (
-              <p><strong><StyledAnchorTag key={slug} href={slug}>{section}</StyledAnchorTag></strong></p>
-            )
-          }
-          return (
-            <p><strong><StyledLink key={slug} to={slug}>{section}</StyledLink></strong></p>
-          )
-        }
-        if (slug.includes('https')) {
-          return (
-            <p><StyledAnchorTag key={slug} href={slug}>{section}</StyledAnchorTag></p>
-          )
-        }
-        return (
-          <p><StyledLink key={slug} to={slug}>{section}</StyledLink></p>
-        )
-      })}
+    <Col>0
+      {linksArray.map(({ slug, section }, idx) => <FooterLink key={slug} slug={slug} section={section} idx={idx} />)}
     </Col>
   )
 
