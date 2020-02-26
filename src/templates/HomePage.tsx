@@ -23,6 +23,13 @@ const Line = s(Row)`
   border-bottom: 1px solid #EBEBEB;
 `
 
+const StyledRow = s(Row)`
+  borderBottom: 1px solid #EBEBEB;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  margin-right: 0.5em;
+`
+
 interface IHomeProps {
   pageContext: {
     centerpiece: IArticle
@@ -37,13 +44,13 @@ const Home = ({
   pageContext: {
     centerpiece: {
       dominantMedia: {
-        attachment_uuid,
-        extension
+        attachment_uuid: center_uuid,
+        extension: center_extension
       },
-      headline,
-      abstract,
-      slug,
-      created_at
+      headline: center_headline,
+      abstract: center_abstract,
+      slug: center_slug,
+      created_at: center_created
     },
     topArticles,
     mostReadDP,
@@ -65,19 +72,19 @@ const Home = ({
                     slug,
                     created_at
                   }) => (
-                    <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
-                      <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em', marginBottom: '1em', marginRight: '0.5em' }}>
+                    <StyledLink key={slug} to={`/article/${generateSlug(slug, created_at)}`}>
+                      <StyledRow>
                         <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
                         <strong>{headline}</strong>
-                      </Row>
+                      </StyledRow>
                     </StyledLink>
                   ))}
               </Col>
               <Col>
-                <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
-                  <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
-                  <h4> {headline} </h4>
-                  <p dangerouslySetInnerHTML={{ __html: abstract }} />
+                <StyledLink to={`/article/${generateSlug(center_slug, center_created)}`}>
+                  <Image fluid src={IMAGE_URL(center_uuid, center_extension)} />
+                  <h4> {center_headline} </h4>
+                  <p dangerouslySetInnerHTML={{ __html: center_abstract }} />
                 </StyledLink>
               </Col>
             </Row>
