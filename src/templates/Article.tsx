@@ -38,13 +38,22 @@ interface IArticleProps {
   }
 }
 
-const Article = ({ pageContext: context }: IArticleProps ) => {
-  const { article, mostReadDP } = context
-  const { authors, dominantMedia, headline, abstract, content } = article
-  const { name } = authors[0]
-  const { attachment_uuid, created_at, extension } = dominantMedia
-
-  return (
+const Article = ({
+  pageContext: {
+    article: {
+      authors: [{ name }],
+      dominantMedia: {
+        attachment_uuid,
+        created_at,
+        extension
+      },
+      headline,
+      abstract,
+      content
+    },
+    mostReadDP
+  }
+}: IArticleProps ): React.ReactElement => (
     <Layout>
       <Container style={{ marginTop: '1.5em' }}>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
@@ -57,7 +66,7 @@ const Article = ({ pageContext: context }: IArticleProps ) => {
               <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
               <p dangerouslySetInnerHTML={{ __html: content }} />
               <SubHeader style={{ color: '#AA1E22' }}> READ MORE </SubHeader>
-            <Line /> 
+            <Line />
             <Row style={{ marginTop: '1em' }}>
               <Col xs={4} style={{ fontSize: '90%', padding: '0 .6em', borderRight: '1px solid #EBEBEB' }}>
                 <Filler color={'rgba(170, 30, 34, 0.25)'}/>
@@ -78,7 +87,6 @@ const Article = ({ pageContext: context }: IArticleProps ) => {
       </Container>
       <Footer />
     </Layout>
-  )
-}
+)
 
 export default Article
