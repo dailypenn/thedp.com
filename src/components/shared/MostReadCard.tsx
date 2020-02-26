@@ -17,8 +17,7 @@ const Content = s.p`
 `
 
 // TODO: Redefine font-sizes in ems
-export const MostReadCard = ({ idx, content }: IMostReadCardProps) => {
-  return (
+export const MostReadCard = ({ idx, content }: IMostReadCardProps) => (
     <Row>
       <NumberCol xs={3}>{ idx }</NumberCol>
       <Col>
@@ -26,4 +25,3 @@ export const MostReadCard = ({ idx, content }: IMostReadCardProps) => {
       </Col>
     </Row>
   )
-}

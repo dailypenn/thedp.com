@@ -57,7 +57,7 @@ const Article = ({ pageContext: context }: IArticleProps ) => {
               <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
               <p dangerouslySetInnerHTML={{ __html: content }} />
               <SubHeader style={{ color: '#AA1E22' }}> READ MORE </SubHeader>
-            <Line /> 
+            <Line />
             <Row style={{ marginTop: '1em' }}>
               <Col xs={4} style={{ fontSize: '90%', padding: '0 .6em', borderRight: '1px solid #EBEBEB' }}>
                 <Filler color={'rgba(170, 30, 34, 0.25)'}/>

@@ -22,13 +22,11 @@ const RightCol = ({ mostReadDP }: IRightColProps) => (
     <SubHeader style={{ color: '#AA1E22' }}> MOST READ </SubHeader>
     <Card>
       <ListGroup>
-        {mostReadDP.map((article, idx) => {
-          return (
+        {mostReadDP.map((article, idx) => (
             <ListGroup.Item>
               <MostReadCard idx={idx + 1} content={article.ogTitle} />
             </ListGroup.Item>
-          )
-        })}
+          ))}
       </ListGroup>
     </Card>
     <SubHeader style={{ color: '#AA1E22' }}> PODCASTS </SubHeader>
