@@ -33,17 +33,22 @@ interface IHomeProps {
   }
 }
 
-const Home = ({ pageContext: context }: IHomeProps) => {
+const Home = ({ pageContext: context }: IHomeProps): React.ReactElement => {
   const {
-    centerpiece: centerpieceData,
-    topArticles: topData,
+    centerpiece: {
+      dominantMedia,
+      headline,
+      abstract,
+      slug,
+      created_at
+    },
+    topArticles,
     mostReadDP,
     mostRead34,
     mostReadUTB
   } = context
 
-  const { dominantMedia, headline, abstract, slug, created_at } = centerpieceData
-  const { content, attachment_uuid, extension } = dominantMedia
+  const { attachment_uuid, extension } = dominantMedia
 
   return (
     <Layout>
@@ -54,22 +59,19 @@ const Home = ({ pageContext: context }: IHomeProps) => {
             <SubHeader > NEWS </SubHeader>
             <Row style={{ marginBottom: '1em', borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
               <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
-                {topData.map(article => {
-                  const {
+                {topArticles.map(({
                     dominantMedia: { attachment_uuid, extension },
                     headline,
                     slug,
                     created_at
-                  } = article
-                  return (
+                  }) => (
                     <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
                       <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em', marginBottom: '1em', marginRight: '0.5em' }}>
                         <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
                         <strong>{headline}</strong>
                       </Row>
                     </StyledLink>
-                  )
-                })}
+                  ))}
               </Col>
               <Col>
                 <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
