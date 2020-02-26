@@ -10,13 +10,17 @@ import { Filler } from '../components/shared'
 import RightCol from '../components/home/RightCol'
 import { IArticle, IAuthor, IMostReadArticle } from '../types'
 
-const SubHeader = s.h3`
+interface ISubHeaderProps {
+  color: string
+}
+
+const SubHeader = s.h3<ISubHeaderProps>`
   color: #aa1e22;
   font-size: 30px;
   font-weight: 700;
   line-height: 1.0;
   margin: 0.5em 0;
-  color: ${({ color }) => color};
+  color: ${({ color }): string => color};
 `
 
 interface IAuthorProps {
