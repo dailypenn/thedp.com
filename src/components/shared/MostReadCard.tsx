@@ -17,7 +17,7 @@ const Content = s.p`
 `
 
 // TODO: Redefine font-sizes in ems
-export const MostReadCard = ({ idx, content }: IMostReadCardProps) => (
+export const MostReadCard = ({ idx, content }: IMostReadCardProps): React.ReactElement => (
     <Row>
       <NumberCol xs={3}>{ idx }</NumberCol>
       <Col>

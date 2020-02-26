@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Container, Image, Card, ListGroup } from 'react-bootstrap'
+import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
 
 import Layout from '../components/layout'

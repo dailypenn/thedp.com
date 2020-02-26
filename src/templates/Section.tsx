@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Section = () => {
+const Section = (): React.ReactElement =>
   // {mostReadUTB.map(article => (
   //   <Row style={{ borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
   //     <Col>
@@ -12,6 +12,7 @@ const Section = () => {
   //     </Col>
   //   </Row>
   // ))}
-}
+   null
+
 
 export default Section

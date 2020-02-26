@@ -20,7 +20,7 @@ const {
 } = require('./src/constants/api.ts')
 
 // TODO: add action from create HomePage
-const createHomePage = async (createPage) => {
+const createHomePage = async createPage => {
   const resp = await axios.get(CENTERPIECE_API)
   const topResp = await axios.get(TOP_ARTICLES_API)
   const mostReadDPResp = await axios.get(MOST_READ_DP_API)
@@ -36,11 +36,11 @@ const createHomePage = async (createPage) => {
     component: HomeTemplate,
     context: {
       centerpiece: articles[0],
-      topArticles: topArticles.slice(0,3),
+      topArticles: topArticles.slice(0, 3),
       mostReadDP: mostReadDPResp.data.result.slice(0, 5),
       mostRead34: most34Resp.data.result.slice(0, 3),
       mostReadUTB: mostUTBResp.data.result.slice(0, 3),
-    }
+    },
   })
 }
 
@@ -49,32 +49,45 @@ const createHomePage = async (createPage) => {
 const generateSlug = (slug, created_at) => {
   const firstIndex = created_at.indexOf('-')
   const year = created_at.substring(0, firstIndex)
-  const month = created_at.substring(firstIndex + 1, created_at.indexOf('-', firstIndex + 1))
+  const month = created_at.substring(
+    firstIndex + 1,
+    created_at.indexOf('-', firstIndex + 1)
+  )
   return `${year}/${month}/${slug}`
 }
 
 // TODO: add action for creating article pages
-const createArticles = async (createPage) => {
-  const newsResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/news.json`)
-  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
+const createArticles = async createPage => {
+  const newsResp = await axios.get(
+    `${BASE_URL}https://www.thedp.com/section/news.json`
+  )
+  const mostReadDPResp = await axios.get(
+    `${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`
+  )
 
   newsResp.data.articles.forEach(article => {
     const { authors, created_at, slug } = article
-    authors.forEach(async author => await createAuthors(createPage, author.slug))
+    authors.forEach(
+      async author => await createAuthors(createPage, author.slug)
+    )
     createPage({
       path: `/article/${generateSlug(slug, created_at)}`,
       component: ArticleTemplate,
       context: {
         article,
-        mostReadDP: mostReadDPResp.data.result.slice(0, 5)
-      }
+        mostReadDP: mostReadDPResp.data.result.slice(0, 5),
+      },
     })
   })
 }
 
 const createAuthors = async (createPage, slug) => {
-  const resp = await axios.get(`${BASE_URL}https://www.thedp.com/staff/${slug}.json`)
-  const mostReadDPResp = await axios.get(`${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`)
+  const resp = await axios.get(
+    `${BASE_URL}https://www.thedp.com/staff/${slug}.json`
+  )
+  const mostReadDPResp = await axios.get(
+    `${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`
+  )
   const { author, articles } = resp.data
   let filteredArticles = []
   if (articles) {
@@ -91,7 +104,7 @@ const createAuthors = async (createPage, slug) => {
       filteredArticles,
       author,
       mostReadDP: mostReadDPResp.data.result.slice(0, 5),
-    }
+    },
   })
 }
 
