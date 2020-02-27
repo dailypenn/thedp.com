@@ -19,7 +19,7 @@ const {
   MOST_READ_34_API,
   SECTION_API,
   STAFF_API
-} = require('./src/constants/api.ts')
+} = require('./src/constants/api.js')
 
 const createHomePage = async createPage => {
   const resp = await axios.get(CENTERPIECE_API)
