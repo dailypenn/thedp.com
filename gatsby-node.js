@@ -20,7 +20,6 @@ const {
   MOST_READ_34_API,
 } = require('./src/constants/api.ts')
 
-// TODO: add action from create HomePage
 const createHomePage = async createPage => {
   const resp = await axios.get(CENTERPIECE_API)
   const topResp = await axios.get(TOP_ARTICLES_API)
@@ -44,7 +43,6 @@ const createHomePage = async createPage => {
   })
 }
 
-// TODO: add action for creating section pages
 const createSections = async (createPage, slug) => {
   const sectionResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/${slug}.json`)
   const mostReadDPResp = await axios.get(MOST_READ_DP_API)
@@ -81,7 +79,6 @@ const generateSlug = (slug, created_at) => {
   return `${year}/${month}/${slug}`
 }
 
-// TODO: add action for creating article pages
 const createArticles = async createPage => {
   const newsResp = await axios.get(
     `${BASE_URL}https://www.thedp.com/section/news.json`
