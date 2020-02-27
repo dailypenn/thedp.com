@@ -68,7 +68,7 @@ const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {
                 </StyledLink>
               </Col>
             </Row>
-            <Filler/>
+            <Filler color={'#DFF3DB'}/>
             <Row>
               <SubHeader color={'black'}>MOST RECENT</SubHeader>
             </Row>
@@ -91,7 +91,7 @@ const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {
                     </Row>
                   )
               })}
-              <Filler/>
+              <Filler color={'#DFF3DB'}/>
           </Col>
           <RightCol mostReadDP={mostReadDP} />
         </Row>

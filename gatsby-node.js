@@ -29,7 +29,6 @@ const createHomePage = async (createPage) => {
   const mostUTBResp = await axios.get(MOST_READ_UTB_API)
 
   const { articles } = resp.data
-
   const { articles: topArticles } = topResp.data
 
   createPage({
@@ -45,22 +44,19 @@ const createHomePage = async (createPage) => {
   })
 }
 
-// TODO: add action for creating section pages]
+// TODO: add action for creating section pages
 const createSections = async (createPage, slug) => {
   const sectionResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/${slug}.json`)
   const mostReadDPResp = await axios.get(MOST_READ_DP_API)
   const topResp = await axios.get(TOP_ARTICLES_API)
-  const { articles } = sectionResp.data
+  const { articles = [] } = sectionResp.data
   const { articles: topArticles } = topResp.data
+  const { data : { result } } = mostReadDPResp
 
-  let filteredArticles = []
-  if (articles) {
-    filteredArticles = articles.map(article => {
-      delete article.content
-      return article
-    })
-  }
-
+  const filteredArticles = articles.map(article => {
+    delete article.content
+    return article
+  })
   
   createPage({
     path: `section/${slug}`,
@@ -70,11 +66,9 @@ const createSections = async (createPage, slug) => {
       section: slug,
       centerpiece: topArticles[0],
       topArticles: topArticles.slice(1, 3),
-      mostReadDP: mostReadDPResp.data.result.slice(0, 5),
+      mostReadDP: result.slice(0, 5),
     }
   })
-
-
 }
 
 const generateSlug = (slug, created_at) => {
@@ -102,8 +96,6 @@ const createArticles = async (createPage) => {
     })
   })
 }
-
-
 
 const createAuthors = async (createPage, slug) => {
   const resp = await axios.get(`${BASE_URL}https://www.thedp.com/staff/${slug}.json`)
