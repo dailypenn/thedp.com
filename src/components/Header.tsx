@@ -1,6 +1,6 @@
 import React from 'react'
 import s from 'styled-components'
-import { Button, Nav, Row, Navbar } from 'react-bootstrap'
+import { Button, Nav, Row, Navbar, Image } from 'react-bootstrap'
 
 import {
   WHITE,
@@ -10,30 +10,23 @@ import {
   DP_DARK_RED
 } from '../styles/colors'
 import {
-  LogoIcon,
   FBIcon,
   TwitterIcon,
   InstagramIcon,
   SearchIcon,
   StyledLink
 } from './shared'
+import { NavBarLinks } from '../constants'
 
-const TopRow = s(Row)`
+const TopRow = s.div`
   text-align: center;
   padding: 20px 0 10px;
   background: ${WHITE};
   justify-content: center;
 `
 
-const HeaderLogo = s(LogoIcon)`
-  height: 60px;
-  max-width: 100%;
-  display: initial;
-  vertical-align: middle;
-`
-
 const HeaderLogoText = s.p`
-  width: 585px;
+  width: 700px;
   align-items: center;
   margin: auto;
   font-family: "Heebo", sans-serif;
@@ -41,21 +34,20 @@ const HeaderLogoText = s.p`
   height: 20px;
   margin-top: -10px;
   text-align: right;
-  color: default;
-  text-decoration: none;
-  font-size: 14px;
 `
 
-const HeaderLogoWrapper = s.div`
-  text-align: center;
-`
+const ButtonWrapper = s.div`
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
 
-const ButtonWrapper1 = s.div`
-  position: absolute;
-  right: 40px;
-  top: 20px;
-  display: flex;
-  flex-direction: column;
+  @media only screen and (min-width: 1100px) {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 const NewsButton = s(Button)`
@@ -108,7 +100,7 @@ const NavLink = s(Nav.Link)`
   font-family: "Heebo", sans-serif;
 `
 
-const SocialIcons = s(Nav)`
+const SocialIcons = s.div`
   margin-left: auto;
   margin-right: 10px;
 `
@@ -117,62 +109,67 @@ const IconWrapper = s.a`
   padding: 15px;
 `
 
+const LogoImage = s.img`
+  width: 700px;
+  display: initial;
+  max-width: 100%;
+  height: auto;
+`
+
 // TODO: Make mcModal trigger a modal
 const Header = (): React.ReactElement => (
-    <header>
-      <TopRow className="hidden-xs">
+  <>
+    <TopRow className="hidden-xs">
+      <div style={{ display: 'block' }}>
         <StyledLink to="/">
-          <HeaderLogoWrapper>
-            <HeaderLogo />
-            <HeaderLogoText>
-              Founded in 1885
-            </HeaderLogoText>
-          </HeaderLogoWrapper>
+          <LogoImage src={'https://d1q35ni5859stt.cloudfront.net/40388fc9a13ea9253e1ca9ed785affde/dist/img/header-logo.svg'}/>
         </StyledLink>
-        <ButtonWrapper1>
-          <NewsButton variant="primary" size="sm">
-            NEWSLETTERS
-          </NewsButton>
-          <DonateButton variant="inverse" size="sm">
-            DONATE
-          </DonateButton>
-        </ButtonWrapper1>￼
-      </TopRow>
-      <HeaderNavbar>
-        <NavbarContainer>
-          <Navbar.Collapse>
-            <Nav>
-              <Navbar.Brand>
-              <IconWrapper>
-                <SearchIcon style={{ width: '16px' }} />
-              </IconWrapper>
-              </Navbar.Brand>
-              <NavDate>
-                February 8th, 2020
-              </NavDate>
-              <NavLink href="">NEWS</NavLink>
-              <NavLink href="">SPORTS</NavLink>
-              <NavLink href="">OPINION</NavLink>
-              <NavLink href="">PROJECTS</NavLink>
-              <NavLink href="">34TH STREET</NavLink>
-              <NavLink href="">UNDER THE BUTTON</NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </NavbarContainer>
-        <SocialIcons>
-          <IconWrapper>
-            <FBIcon style={{ width: '20px' }} />
-          </IconWrapper>
-          <IconWrapper>
-            <TwitterIcon style={{ width: '20px' }} />
-          </IconWrapper>
-          <IconWrapper>
-            <InstagramIcon style={{ width: '20px' }} />
-          </IconWrapper>
-        </SocialIcons>
-      </HeaderNavbar>
-    </header>
-  )
+        <HeaderLogoText>
+          Founded in 1885
+        </HeaderLogoText>
+      </div>
+      <ButtonWrapper>
+        <NewsButton variant="primary" size="sm">
+          NEWSLETTERS
+        </NewsButton>
+        <DonateButton variant="inverse" size="sm">
+          DONATE
+        </DonateButton>
+      </ButtonWrapper>
+    </TopRow>
+    <HeaderNavbar expand="md">
+      <IconWrapper>
+        <SearchIcon style={{ width: '16px' }} />
+      </IconWrapper>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" >
+          <Nav>
+            <Navbar.Brand>
+            </Navbar.Brand>
+            <NavDate>
+              February 8th, 2020
+            </NavDate>
+            {NavBarLinks.map(({ section, slug }) => (
+              <NavLink href={slug}>
+                {section}
+              </NavLink>
+            ))}
+          </Nav>
+        </Navbar.Collapse>
+      <SocialIcons>
+        <IconWrapper>
+          <FBIcon style={{ width: '20px' }} />
+        </IconWrapper>
+        <IconWrapper>
+          <TwitterIcon style={{ width: '20px' }} />
+        </IconWrapper>
+        <IconWrapper>
+          <InstagramIcon style={{ width: '20px' }} />
+        </IconWrapper>
+      </SocialIcons>
+    </HeaderNavbar>
+  </>
+)
 
 
 export default Header
