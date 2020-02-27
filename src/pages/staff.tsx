@@ -1,7 +1,5 @@
 import React from 'react'
 
-const Staff = () => {
-  return null
-}
+const Staff = (): React.ReactElement => null
 
 export default Staff

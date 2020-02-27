@@ -17,18 +17,16 @@ interface IRightColProps {
   mostReadDP: IMostReadArticle[]
 }
 
-const RightCol = ({ mostReadDP }: IRightColProps) => (
+const RightCol = ({ mostReadDP }: IRightColProps): React.ReactElement => (
   <Col xs={3} style={{ borderLeft: '1px solid #EBEBEB' }}>
     <SubHeader style={{ color: '#AA1E22' }}> MOST READ </SubHeader>
     <Card>
       <ListGroup>
-        {mostReadDP.map((article, idx) => {
-          return (
-            <ListGroup.Item>
-              <MostReadCard idx={idx + 1} content={article.ogTitle} />
+        {mostReadDP.map(({ ogTitle }, idx) => (
+            <ListGroup.Item key={ogTitle} >
+              <MostReadCard idx={idx + 1} content={ogTitle} />
             </ListGroup.Item>
-          )
-        })}
+          ))}
       </ListGroup>
     </Card>
     <SubHeader style={{ color: '#AA1E22' }}> PODCASTS </SubHeader>
