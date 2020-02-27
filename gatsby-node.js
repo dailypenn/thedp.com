@@ -7,7 +7,6 @@
 const path = require('path')
 const axios = require('axios')
 
-const BASE_URL = 'http://localhost:5000/fetch?url='
 const HomeTemplate = path.resolve('./src/templates/HomePage.tsx')
 const AuthorTemplate = path.resolve('./src/templates/Author.tsx')
 const ArticleTemplate = path.resolve('./src/templates/Article.tsx')
@@ -18,6 +17,8 @@ const {
   MOST_READ_DP_API,
   MOST_READ_UTB_API,
   MOST_READ_34_API,
+  SECTION_API,
+  STAFF_API
 } = require('./src/constants/api.ts')
 
 const createHomePage = async createPage => {
@@ -44,7 +45,7 @@ const createHomePage = async createPage => {
 }
 
 const createSections = async (createPage, slug) => {
-  const sectionResp = await axios.get(`${BASE_URL}https://www.thedp.com/section/${slug}.json`)
+  const sectionResp = await axios.get(SECTION_API(slug))
   const mostReadDPResp = await axios.get(MOST_READ_DP_API)
   const topResp = await axios.get(TOP_ARTICLES_API)
   const { articles = [] } = sectionResp.data
@@ -80,12 +81,8 @@ const generateSlug = (slug, created_at) => {
 }
 
 const createArticles = async createPage => {
-  const newsResp = await axios.get(
-    `${BASE_URL}https://www.thedp.com/section/news.json`
-  )
-  const mostReadDPResp = await axios.get(
-    `${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`
-  )
+  const newsResp = await axios.get(SECTION_API('news'))
+  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
 
   newsResp.data.articles.forEach(article => {
     const { authors, created_at, slug } = article
@@ -104,12 +101,9 @@ const createArticles = async createPage => {
 }
 
 const createAuthors = async (createPage, slug) => {
-  const resp = await axios.get(
-    `${BASE_URL}https://www.thedp.com/staff/${slug}.json`
-  )
-  const mostReadDPResp = await axios.get(
-    `${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`
-  )
+  const resp = await axios.get(STAFF_API(slug))
+  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
+
   const { author, articles } = resp.data
   let filteredArticles = []
   if (articles) {

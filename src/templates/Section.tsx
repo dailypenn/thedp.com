@@ -72,7 +72,7 @@ const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {
             <Row>
               <SubHeader color={'black'}>MOST RECENT</SubHeader>
             </Row>
-              {filteredArticles.map((article, idx) => {
+              {filteredArticles.map(article => {
                   const { abstract, uuid, headline, dominantMedia } = article
                   const { attachment_uuid, extension } = dominantMedia
                   return (
