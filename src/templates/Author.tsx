@@ -5,7 +5,6 @@ import s from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
-
 import { Filler } from '../components/shared'
 import RightCol from '../components/home/RightCol'
 import { IArticle, IAuthor, IMostReadArticle } from '../types'

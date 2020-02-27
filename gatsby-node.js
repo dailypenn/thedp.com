@@ -7,19 +7,20 @@
 const path = require('path')
 const axios = require('axios')
 
-const BASE_URL = 'http://localhost:5000/fetch?url='
 const HomeTemplate = path.resolve('./src/templates/HomePage.tsx')
 const AuthorTemplate = path.resolve('./src/templates/Author.tsx')
 const ArticleTemplate = path.resolve('./src/templates/Article.tsx')
+const SectionTemplate = path.resolve('./src/templates/Section.tsx')
 const {
   CENTERPIECE_API,
   TOP_ARTICLES_API,
   MOST_READ_DP_API,
   MOST_READ_UTB_API,
   MOST_READ_34_API,
-} = require('./src/constants/api.ts')
+  SECTION_API,
+  STAFF_API
+} = require('./src/constants/api.js')
 
-// TODO: add action from create HomePage
 const createHomePage = async createPage => {
   const resp = await axios.get(CENTERPIECE_API)
   const topResp = await axios.get(TOP_ARTICLES_API)
@@ -28,7 +29,6 @@ const createHomePage = async createPage => {
   const mostUTBResp = await axios.get(MOST_READ_UTB_API)
 
   const { articles } = resp.data
-
   const { articles: topArticles } = topResp.data
 
   createPage({
@@ -44,7 +44,31 @@ const createHomePage = async createPage => {
   })
 }
 
-// TODO: add action for creating section pages
+const createSections = async (createPage, slug) => {
+  const sectionResp = await axios.get(SECTION_API(slug))
+  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
+  const topResp = await axios.get(TOP_ARTICLES_API)
+  const { articles = [] } = sectionResp.data
+  const { articles: topArticles } = topResp.data
+  const { data : { result } } = mostReadDPResp
+
+  const filteredArticles = articles.map(article => {
+    delete article.content
+    return article
+  })
+  
+  createPage({
+    path: `section/${slug}`,
+    component: SectionTemplate,
+    context: {
+      filteredArticles,
+      section: slug,
+      centerpiece: topArticles[0],
+      topArticles: topArticles.slice(1, 3),
+      mostReadDP: result.slice(0, 5),
+    }
+  })
+}
 
 const generateSlug = (slug, created_at) => {
   const firstIndex = created_at.indexOf('-')
@@ -56,14 +80,9 @@ const generateSlug = (slug, created_at) => {
   return `${year}/${month}/${slug}`
 }
 
-// TODO: add action for creating article pages
 const createArticles = async createPage => {
-  const newsResp = await axios.get(
-    `${BASE_URL}https://www.thedp.com/section/news.json`
-  )
-  const mostReadDPResp = await axios.get(
-    `${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`
-  )
+  const newsResp = await axios.get(SECTION_API('news'))
+  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
 
   newsResp.data.articles.forEach(article => {
     const { authors, created_at, slug } = article
@@ -82,12 +101,9 @@ const createArticles = async createPage => {
 }
 
 const createAuthors = async (createPage, slug) => {
-  const resp = await axios.get(
-    `${BASE_URL}https://www.thedp.com/staff/${slug}.json`
-  )
-  const mostReadDPResp = await axios.get(
-    `${BASE_URL}https://us-central1-web-services-dp.cloudfunctions.net/dropcap/DP`
-  )
+  const resp = await axios.get(STAFF_API(slug))
+  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
+
   const { author, articles } = resp.data
   let filteredArticles = []
   if (articles) {
@@ -111,6 +127,7 @@ const createAuthors = async (createPage, slug) => {
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
+  await createSections(createPage, 'news')
   await createHomePage(createPage)
   await createArticles(createPage)
 }

@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 import Footer from '../components/Footer'
 import { IArticle, IMostReadArticle } from '../types'
 import { IMAGE_URL } from '../utils/helperFunctions'
-import { Filler } from '../components/shared'
+import { Filler, ArticleContent, CaptionText, ArticleHeader } from '../components/shared'
 
 const SubHeader = s.h3`
   color: #black;
@@ -38,14 +38,15 @@ interface IArticleProps {
   }
 }
 
-const Article = ({
+const Article: React.FC<IArticleProps> = ({
   pageContext: {
     article: {
       authors: [{ name }],
       dominantMedia: {
         attachment_uuid,
         created_at,
-        extension
+        extension,
+        content: imageContent
       },
       headline,
       abstract,
@@ -53,19 +54,20 @@ const Article = ({
     },
     mostReadDP
   }
-}: IArticleProps ): React.ReactElement => (
+}) => (
     <Layout>
       <Container style={{ marginTop: '1.5em' }}>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
           <Col xs={9}>
-            <SubHeader > {headline} </SubHeader>
-            <SubHeader style={{fontSize: '15px'}} dangerouslySetInnerHTML={{ __html: abstract }} />
-            <AuthorName>By {name}</AuthorName>
+            <ArticleHeader > { headline } </ArticleHeader>
+            <SubHeader style={{ fontSize: '15px' }} dangerouslySetInnerHTML={{ __html: abstract }} />
+            <AuthorName> By {name} </AuthorName>
             <p>{created_at}</p>
-            <Filler color={'#DFF3DB'}/>
-              <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
-              <p dangerouslySetInnerHTML={{ __html: content }} />
-              <SubHeader style={{ color: '#AA1E22' }}> READ MORE </SubHeader>
+            <Filler color="#DFF3DB" />
+            <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
+            <CaptionText dangerouslySetInnerHTML={{ __html: imageContent }} />
+            <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
+            <SubHeader style={{ color: '#AA1E22' }}> READ MORE </SubHeader>
             <Line />
             <Row style={{ marginTop: '1em' }}>
               <Col xs={4} style={{ fontSize: '90%', padding: '0 .6em', borderRight: '1px solid #EBEBEB' }}>

@@ -234,4 +234,31 @@ export const UnderTheButtonLinks: ILink[] = [
   },
 ]
 
+export const NavBarLinks: ILink[] = [
+  {
+    section: 'NEWS',
+    slug: '/section/news'
+  },
+  {
+    section: 'SPORTS',
+    slug: '/section/sports'
+  },
+  {
+    section: 'OPINION',
+    slug: '/section/opinion',
+  },
+  {
+    section: 'PROJECTS',
+    slug: '/section/projects',
+  },
+  {
+    section: '34TH STREET',
+    slug: 'https://www.34st.com',
+  },
+  {
+    section: 'UNDER THE BUTTON',
+    slug: 'https://www.underthebutton.com/',
+  }
+]
+
 // export const SectionLinks = [AboutLinks, NewsLinks, SportsLinks, OpinionLinks, StreetLinks, UnderTheButtonLinks]

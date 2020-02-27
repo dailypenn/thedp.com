@@ -5,7 +5,7 @@ import s from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
-import RightCol from '../components/Home/RightCol'
+import RightCol from '../components/home/RightCol'
 import { IArticle, IMostReadArticle } from '../types'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
 import { StyledLink, Filler } from '../components/shared'
@@ -63,7 +63,7 @@ const Home = ({
       <Container style={{ marginTop: '1.5em' }}>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
           <Col xs={9}>
-            <SubHeader > NEWS </SubHeader>
+            <SubHeader> NEWS </SubHeader>
             <Row style={{ marginBottom: '1em', borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
               <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
                 {topArticles.map(({

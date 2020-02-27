@@ -17,8 +17,8 @@ interface IRightColProps {
   mostReadDP: IMostReadArticle[]
 }
 
-const RightCol = ({ mostReadDP }: IRightColProps): React.ReactElement => (
-  <Col xs={3} style={{ borderLeft: '1px solid #EBEBEB' }}>
+const RightCol: React.FC<IRightColProps> = ({ mostReadDP }) => (
+  <Col style={{ borderLeft: '1px solid #EBEBEB' }}>
     <SubHeader style={{ color: '#AA1E22' }}> MOST READ </SubHeader>
     <Card>
       <ListGroup>
@@ -29,8 +29,8 @@ const RightCol = ({ mostReadDP }: IRightColProps): React.ReactElement => (
           ))}
       </ListGroup>
     </Card>
-    <SubHeader style={{ color: '#AA1E22' }}> PODCASTS </SubHeader>
-    <SubHeader style={{ color: '#AA1E22' }}> PRINT ISSUES </SubHeader>
+    <SubHeader> PODCASTS </SubHeader>
+    <SubHeader> PRINT ISSUES </SubHeader>
   </Col>
 )
 

@@ -1,18 +1,105 @@
 import React from 'react'
+import { Row, Col, Container, Image } from 'react-bootstrap'
 
-const Section = (): React.ReactElement =>
-  // {mostReadUTB.map(article => (
-  //   <Row style={{ borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
-  //     <Col>
-  //       <img src={article.image} />
-  //     </Col>
-  //     <Col>
-  //     <p> <strong dangerouslySetInnerHTML={{ __html: article.ogTitle }}/> </p>
-  //     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-  //     </Col>
-  //   </Row>
-  // ))}
-   null
+import { IArticle, IMostReadArticle } from '../types'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import Footer from '../components/Footer'
+import s from 'styled-components'
+import RightCol from '../components/home/RightCol'
+import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
+import { StyledLink, Filler } from '../components/shared'
+
+
+const SubHeader = s.h3`
+  color: #aa1e22;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.0;
+  margin: 0.5em 0;
+  color: ${({ color }) => color};
+`
+
+interface ISectionProps {
+  pageContext: {
+    filteredArticles: IArticle[]
+    mostReadDP: IMostReadArticle[]
+    section: string
+    topArticles: IArticle[]
+    centerpiece: IArticle
+  }
+}
+
+const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {  
+  const { filteredArticles, mostReadDP, section, topArticles, centerpiece } = context
+  const { dominantMedia, headline, abstract, slug, created_at } = centerpiece
+  const { attachment_uuid, extension } = dominantMedia
+  return (
+    <Layout>
+      <SEO title="Section"/>
+      <Container style={{ marginTop: '1.5em' }}>
+        <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
+          <Col xs={9}>
+            <Row><SubHeader color='black'>{section.toUpperCase()}</SubHeader></Row>
+            <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em' }}>
+            <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
+                {topArticles.map(article => {
+                  const {
+                    dominantMedia: { attachment_uuid, extension },
+                    headline,
+                    slug,
+                    created_at
+                  } = article
+                  return (
+                    <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
+                      <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em', marginBottom: '1em', marginRight: '0.5em' }}>
+                        <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
+                        <strong>{headline}</strong>
+                      </Row>
+                    </StyledLink>
+                  )
+                })}
+              </Col>
+              <Col xs={8}>
+                <StyledLink to={`/article/${generateSlug(slug, created_at)}`}>
+                  <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
+                  <h4> {headline} </h4>
+                  <p dangerouslySetInnerHTML={{ __html: abstract }} />
+                </StyledLink>
+              </Col>
+            </Row>
+            <Filler color={'#DFF3DB'}/>
+            <Row>
+              <SubHeader color={'black'}>MOST RECENT</SubHeader>
+            </Row>
+              {filteredArticles.map(article => {
+                  const { abstract, uuid, headline, dominantMedia } = article
+                  const { attachment_uuid, extension } = dominantMedia
+                  return (
+                    <Row key={uuid} style = {{borderBottom: '1px solid #EBEBEB'}}>
+                      <Col xs={4} style={{padding: '1em', margin: '1em'}}>
+                        <Row>
+                        <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
+                        </Row>
+                      </Col>
+                      <Col style={{padding: '1em', margin: '1em'}}>
+                        <Row>
+                          <h5>{headline}</h5>
+                          <p dangerouslySetInnerHTML={{ __html:  abstract}}/>
+                        </Row>
+                      </Col>
+                    </Row>
+                  )
+              })}
+              <Filler color={'#DFF3DB'}/>
+          </Col>
+          <RightCol mostReadDP={mostReadDP} />
+        </Row>
+      </Container>
+     <Footer/>
+    </Layout>
+  )
+}
 
 
 export default Section
