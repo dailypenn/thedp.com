@@ -40,7 +40,6 @@ interface IHomeProps {
   }
 }
 
-
 const Home = ({
   pageContext: {
     centerpiece: {
