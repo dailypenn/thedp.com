@@ -35,4 +35,8 @@ export const ArticleContent = s.p`
     color: ${DP_RED} !important;
     text-decoration: none !important;
   }
+
+  img {
+    max-width: 100%;
+  }
 `
