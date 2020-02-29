@@ -3,7 +3,7 @@ import { Col, Card, ListGroup } from 'react-bootstrap'
 import s from 'styled-components'
 
 import { IMostReadArticle } from '../../types'
-import { MostReadCard } from '../shared'
+import { MostReadCard, StyledLink } from '../shared'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -22,10 +22,12 @@ const RightCol: React.FC<IRightColProps> = ({ mostReadDP }) => (
     <SubHeader style={{ color: '#AA1E22' }}> MOST READ </SubHeader>
     <Card>
       <ListGroup>
-        {mostReadDP.map(({ ogTitle }, idx) => (
+        {mostReadDP.map(({ ogTitle, path }, idx) => (
+          <StyledLink key={path} to={path}>
             <ListGroup.Item key={ogTitle} >
               <MostReadCard idx={idx + 1} content={ogTitle} />
             </ListGroup.Item>
+          </StyledLink>
           ))}
       </ListGroup>
     </Card>
