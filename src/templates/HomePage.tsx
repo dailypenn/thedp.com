@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 import RightCol from '../components/home/RightCol'
 import { IArticle, IMostReadArticle } from '../types'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
-import { StyledLink, Filler } from '../components/shared'
+import { StyledLink, StyledAnchorTag, Filler } from '../components/shared'
 
 const SubHeader = s.h3`
   color: #aa1e22;
@@ -94,39 +94,52 @@ const Home = ({
             <SubHeader> FROM 34TH STREET </SubHeader>
             <p style={{ fontStyle: 'italic' }}> The DP&#39;s arts and culture magazine </p>
             <div style={{ borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
+            <StyledAnchorTag href={`https://www.34st.com${mostRead34[0].path}`}> 
               <div style={{ textAlign: 'center', padding: '0 5em' }}>
                 <img style={{ height: '300px' }} src={mostRead34[0].image} />
                 <p> <strong dangerouslySetInnerHTML={{ __html: mostRead34[0].ogTitle }} /> </p>
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
               </div>
+            </StyledAnchorTag>
             </div>
             <Row style={{ marginTop: '1em', borderBottom: '1px solid #A9A9A9', paddingBottom: '1em', marginRight: '1em' }}>
               <Col xs={6} style={{ fontSize: '90%', padding: '0 2em', borderRight: '1px solid #EBEBEB' }}>
+              <StyledAnchorTag href={`https://www.34st.com${mostRead34[1].path}`}> 
                 <p> <strong dangerouslySetInnerHTML={{ __html: mostRead34[1].ogTitle }} /> </p>
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+              </StyledAnchorTag>
               </Col>
               <Col style={{ fontSize: '90%', padding: '0 2em' }}>
+              <StyledAnchorTag href={`https://www.34st.com${mostRead34[2].path}`}> 
                 <p> <strong dangerouslySetInnerHTML={{ __html: mostRead34[2].ogTitle }} /> </p>
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+              </StyledAnchorTag>
               </Col>
             </Row>
             <SubHeader> FROM UNDER THE BUTTON </SubHeader>
             <p style={{ fontStyle: 'italic' }}> Penn&#39;s only intentionally satirical publication </p>
             <div style={{ borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
+              {console.log(mostReadUTB[0])}
+            <StyledAnchorTag href={`https://www.underthebutton.com${mostReadUTB[0].path}`}> 
               <div style={{ textAlign: 'center', padding: '0 5em' }}>
                 <img style={{ height: '300px' }} src={mostReadUTB[0].image} />
                 <p> <strong dangerouslySetInnerHTML={{ __html: mostReadUTB[0].ogTitle }} /> </p>
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
               </div>
+            </StyledAnchorTag>
             </div>
             <Row style={{ marginTop: '1em' }}>
               <Col xs={6} style={{ fontSize: '90%', padding: '0 2em', borderRight: '1px solid #EBEBEB' }}>
+              <StyledAnchorTag href={`https://www.underthebutton.com${mostReadUTB[1].path}`}> 
                 <p> <strong dangerouslySetInnerHTML={{ __html: mostReadUTB[1].ogTitle }} /> </p>
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                </StyledAnchorTag>
               </Col>
               <Col style={{ fontSize: '90%', padding: '0 2em' }}>
+              <StyledAnchorTag href={`https://www.underthebutton.com${mostReadUTB[2].path}`}> 
                 <p> <strong dangerouslySetInnerHTML={{ __html: mostReadUTB[2].ogTitle }} /> </p>
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                </StyledAnchorTag>
               </Col>
             </Row>
           </Col>
