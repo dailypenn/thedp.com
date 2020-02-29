@@ -1,6 +1,4 @@
-import { ILink } from './types'
-
-export const AboutLinks: ILink[] = [
+const AboutLinks = [
   {
     section: 'About',
     slug: '/page/about',
@@ -43,7 +41,7 @@ export const AboutLinks: ILink[] = [
   },
 ]
 
-export const NewsLinks: ILink[] = [
+const NewsLinks = [
   {
     section: 'News',
     slug: '/section/news',
@@ -82,7 +80,7 @@ export const NewsLinks: ILink[] = [
   },
 ]
 
-export const SportsLinks: ILink[] = [
+const SportsLinks = [
   {
     section: 'Sports',
     slug: '/section/sports',
@@ -129,7 +127,7 @@ export const SportsLinks: ILink[] = [
   },
 ]
 
-export const OpinionLinks: ILink[] = [
+const OpinionLinks = [
   {
     section: 'Opinion',
     slug: '/section/opinion',
@@ -160,101 +158,11 @@ export const OpinionLinks: ILink[] = [
   },
 ]
 
-export const StreetLinks: ILink[] = [
-  {
-    section: '34th Street',
-    slug: 'https://www.34st.com',
-  },
-  {
-    section: 'Features',
-    slug: 'https://www.34st.com/section/features',
-  },
-  {
-    section: 'Ego',
-    slug: 'https://www.34st.com/section/ego',
-  },
-  {
-    section: 'Word on the Street',
-    slug: 'https://www.34st.com/section/word-on-the-street',
-  },
-  {
-    section: 'Film & TV',
-    slug: 'https://www.34st.com/section/film',
-  },
-  {
-    section: 'Music',
-    slug: 'https://www.34st.com/section/music',
-  },
-  {
-    section: 'Arts',
-    slug: 'https://www.34st.com/section/arts',
-  },
-  {
-    section: 'Style',
-    slug: 'https://www.34st.com/section/style',
-  },
-  {
-    section: 'Overheads',
-    slug: 'https://www.34st.com/section/overheads',
-  },
-  {
-    section: 'Visual Stories',
-    slug: 'https://www.34st.com/section/visualstories',
-  },
-  {
-    section: 'Projects',
-    slug: 'https://projects.34st.com',
-  },
-]
-
-export const UnderTheButtonLinks: ILink[] = [
-  {
-    section: 'Under the Button',
-    slug: 'https://www.underthebutton.com/',
-  },
-  {
-    section: 'News',
-    slug: 'https://www.underthebutton.com/section/news',
-  },
-  {
-    section: 'Opinion',
-    slug: 'https://www.underthebutton.com/section/opinion',
-  },
-  {
-    section: 'Video',
-    slug: 'https://www.underthebutton.com/section/video',
-  },
-  {
-    section: 'Projects',
-    slug: 'https://projects.underthebutton.com/',
-  },
-]
-
-export const NavBarLinks: ILink[] = [
-  {
-    section: 'NEWS',
-    slug: '/section/news'
-  },
-  {
-    section: 'SPORTS',
-    slug: '/section/sports'
-  },
-  {
-    section: 'OPINION',
-    slug: '/section/opinion',
-  },
-  {
-    section: 'PROJECTS',
-    slug: '/section/projects',
-  },
-  {
-    section: '34TH STREET',
-    slug: 'https://www.34st.com',
-  },
-  {
-    section: 'UNDER THE BUTTON',
-    slug: 'https://www.underthebutton.com/',
-  }
-]
+module.exports = {
+  NewsLinks,
+  AboutLinks,
+  OpinionLinks,
+  SportsLinks
+}
 
 // export const SectionLinks = [AboutLinks, NewsLinks, SportsLinks, OpinionLinks, StreetLinks, UnderTheButtonLinks]

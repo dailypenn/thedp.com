@@ -15,6 +15,7 @@ app.get('/fetch', async ({ query: { url = '' } }, res) => {
     const { data } = await axios.get(url)
     res.json(data)
   } catch (e) {
+    console.log(`Error occurs at this url: ${url}`)
     console.log(`Error: ${e}`)
   }
 })
