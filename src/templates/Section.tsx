@@ -31,8 +31,8 @@ interface ISectionProps {
 }
 
 const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {  
-  const { filteredArticles, mostReadDP, section, topArticles, centerpiece } = context
-  const { dominantMedia, headline, abstract, slug, created_at } = centerpiece
+  const { filteredArticles, mostReadDP, section } = context
+  const { dominantMedia, headline, abstract, slug, created_at } = filteredArticles[0]
   const { attachment_uuid, extension } = dominantMedia
   return (
     <Layout>
@@ -43,7 +43,7 @@ const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {
             <Row><SubHeader color='black'>{section.toUpperCase()}</SubHeader></Row>
             <Row style={{ borderBottom: '1px solid #EBEBEB', paddingBottom: '1em' }}>
             <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
-                {topArticles.map(article => {
+                {filteredArticles.slice(1, 3).map(article => {
                   const {
                     dominantMedia: { attachment_uuid, extension },
                     headline,
@@ -72,7 +72,7 @@ const Section:React.FC<ISectionProps> = ({ pageContext: context }) => {
             <Row>
               <SubHeader color={'black'}>MOST RECENT</SubHeader>
             </Row>
-              {filteredArticles.map(article => {
+              {filteredArticles.slice(3).map(article => {
                   const { abstract, uuid, headline, dominantMedia } = article
                   const { attachment_uuid, extension } = dominantMedia
                   return (

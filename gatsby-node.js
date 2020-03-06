@@ -21,6 +21,13 @@ const {
   STAFF_API
 } = require('./src/constants/api.js')
 
+const {
+  AboutLinks,
+  NewsLinks,
+  SportsLinks,
+  OpinionLinks
+} = require('./constants.js')
+
 const createHomePage = async createPage => {
   const resp = await axios.get(CENTERPIECE_API)
   const topResp = await axios.get(TOP_ARTICLES_API)
@@ -44,31 +51,6 @@ const createHomePage = async createPage => {
   })
 }
 
-const createSections = async (createPage, slug) => {
-  const sectionResp = await axios.get(SECTION_API(slug))
-  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
-  const topResp = await axios.get(TOP_ARTICLES_API)
-  const { articles = [] } = sectionResp.data
-  const { articles: topArticles } = topResp.data
-  const { data : { result } } = mostReadDPResp
-
-  const filteredArticles = articles.map(article => {
-    delete article.content
-    return article
-  })
-  
-  createPage({
-    path: `section/${slug}`,
-    component: SectionTemplate,
-    context: {
-      filteredArticles,
-      section: slug,
-      centerpiece: topArticles[0],
-      topArticles: topArticles.slice(1, 3),
-      mostReadDP: result.slice(0, 5),
-    }
-  })
-}
 
 const generateSlug = (slug, created_at) => {
   const firstIndex = created_at.indexOf('-')
@@ -81,7 +63,7 @@ const generateSlug = (slug, created_at) => {
 }
 
 const createArticles = async createPage => {
-  const newsResp = await axios.get(SECTION_API('news'))
+  const newsResp = await axios.get(SECTION_API('/section/news'))
   const mostReadDPResp = await axios.get(MOST_READ_DP_API)
 
   newsResp.data.articles.forEach(article => {
@@ -124,10 +106,38 @@ const createAuthors = async (createPage, slug) => {
   })
 }
 
+const createSection = (linksArray, createPage) => (
+  linksArray.map(async ({ section, slug }) => {
+    const mostReadDPResp = await axios.get(MOST_READ_DP_API)
+    const { data : { result } } = mostReadDPResp
+    if (!slug.includes('https')) {
+      const sectionResp = await axios.get(SECTION_API(slug))
+      const { articles = [] } = sectionResp.data
+
+      const filteredArticles = articles.map(article => {
+        delete article.content
+        return article
+      })
+      
+      createPage({
+        path: slug,
+        component: SectionTemplate,
+        context: {
+          filteredArticles,
+          section: section,
+          mostReadDP: result.slice(0, 5),
+        }
+      })
+    }
+  })
+)
+
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
-
-  await createSections(createPage, 'news')
+  // await createSection(AboutLinks, createPage)
+  await createSection(NewsLinks, createPage)
+  await createSection(SportsLinks, createPage)
+  await createSection(OpinionLinks, createPage)
   await createHomePage(createPage)
   await createArticles(createPage)
 }

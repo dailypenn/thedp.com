@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:5000/fetch?url='
 
-const SECTION_API = slug => `${BASE_URL}https://www.thedp.com/section/${slug}.json`
+const SECTION_API = slug => `${BASE_URL}https://www.thedp.com${slug}.json`
 const STAFF_API = slug => `${BASE_URL}https://www.thedp.com/staff/${slug}.json`
 
 module.exports = {

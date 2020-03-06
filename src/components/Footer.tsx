@@ -64,10 +64,10 @@ interface IFooterLinksProps {
 }
 
 const FooterLinks: React.FC<IFooterLinksProps> = ({ linksArray }) => (
-    <Col>
-      {linksArray.map(({ slug, section }, idx) => <FooterLink key={slug} slug={slug} section={section} idx={idx} />)}
-    </Col>
-  )
+  <Col>
+    {linksArray.map(({ slug, section }, idx) => <FooterLink key={slug} slug={slug} section={section} idx={idx} />)}
+  </Col>
+)
 
 const Footer = (): React.ReactElement => (
   <Wrapper>
