@@ -106,32 +106,28 @@ const createAuthors = async (createPage, slug) => {
   })
 }
 
-const createSections = async (createPage, section, slug) => {
-  const sectionResp = await axios.get(SECTION_API(slug))
-  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
-  const { articles = [] } = sectionResp.data
-  const { data : { result } } = mostReadDPResp
-
-  const filteredArticles = articles.map(article => {
-    delete article.content
-    return article
-  })
-  
-  createPage({
-    path: slug,
-    component: SectionTemplate,
-    context: {
-      filteredArticles,
-      section: section,
-      mostReadDP: result.slice(0, 5),
-    }
-  })
-}
-
 const createSection = (linksArray, createPage) => (
   linksArray.map(async ({ section, slug }) => {
+    const mostReadDPResp = await axios.get(MOST_READ_DP_API)
+    const { data : { result } } = mostReadDPResp
     if (!slug.includes('https')) {
-      await createSections(createPage, section, slug)
+      const sectionResp = await axios.get(SECTION_API(slug))
+      const { articles = [] } = sectionResp.data
+
+      const filteredArticles = articles.map(article => {
+        delete article.content
+        return article
+      })
+      
+      createPage({
+        path: slug,
+        component: SectionTemplate,
+        context: {
+          filteredArticles,
+          section: section,
+          mostReadDP: result.slice(0, 5),
+        }
+      })
     }
   })
 )
