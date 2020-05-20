@@ -1,13 +1,23 @@
 import React from 'react'
 import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
+import datetime from 'node-datetime'
 
 import RightCol from '../components/home/RightCol'
 import Layout from '../components/layout'
 import Footer from '../components/Footer'
 import { IArticle, IMostReadArticle } from '../types'
 import { IMAGE_URL } from '../utils/helperFunctions'
-import { Filler, ArticleContent, CaptionText, ArticleHeader } from '../components/shared'
+import {
+  Filler,
+  ArticleContent,
+  CaptionText,
+  HeadlineText,
+  AbstractText_HEEBO,
+  SectionHeader,
+  Circle,
+  MailIcon
+} from '../components/shared'
 
 const SubHeader = s.h3`
   color: #black;
@@ -17,13 +27,20 @@ const SubHeader = s.h3`
   margin: 0.5em 0;
 `
 
-const AuthorName = s.h3`
+const AuthorWrapper = s.div`
+  display: flex;
+  margin-bottom: 1rem;
+`
+
+const AuthorName = s.div`
   color: #4B4B4B;
   font-size: 16px;
   font-weight: 400;
   font-family: Heebo;
   font-style: normal;
   font-weight: bold;
+  align-self: center;
+  margin-right: 0.5rem;
 `
 
 const Line = s(Row)`
@@ -59,15 +76,20 @@ const Article: React.FC<IArticleProps> = ({
       <Container style={{ marginTop: '1.5em' }}>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
           <Col xs={9}>
-            <ArticleHeader > { headline } </ArticleHeader>
-            <SubHeader style={{ fontSize: '15px' }} dangerouslySetInnerHTML={{ __html: abstract }} />
-            <AuthorName> By {name} </AuthorName>
-            <p>{created_at}</p>
+            <HeadlineText fontSize='200%'> { headline } </HeadlineText>
+            <AbstractText_HEEBO dangerouslySetInnerHTML={{ __html: abstract }} />
+            <AuthorWrapper>
+              <Circle />
+              <AuthorName> By {name} </AuthorName>
+              <MailIcon style={{ alignSelf: 'center', transform: 'scale(0.8)' }} />
+            </AuthorWrapper>
+            <div>{datetime.create(created_at).format(`f D, Y · I:M p`)}</div>
             <Filler color="#DFF3DB" />
             <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
             <CaptionText dangerouslySetInnerHTML={{ __html: imageContent }} />
             <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
-            <SubHeader style={{ color: '#AA1E22' }}> READ MORE </SubHeader>
+
+            <SectionHeader> READ MORE </SectionHeader>
             <Line />
             <Row style={{ marginTop: '1em' }}>
               <Col xs={4} style={{ fontSize: '90%', padding: '0 .6em', borderRight: '1px solid #EBEBEB' }}>

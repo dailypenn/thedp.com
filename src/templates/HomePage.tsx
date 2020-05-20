@@ -6,25 +6,18 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'
 import RightCol from '../components/home/RightCol'
+import Article from '../components/Article'
 import { IArticle, IMostReadArticle } from '../types'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
-import { StyledLink, StyledAnchorTag, Filler } from '../components/shared'
-
-const SubHeader = s.h3`
-  color: #aa1e22;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 1.0;
-  margin: 0.5em 0;
-`
+import { StyledLink, StyledAnchorTag, Filler, HeadlineText, SectionHeader } from '../components/shared'
 
 const Line = s(Row)`
   margin-right: 1em;
   border-bottom: 1px solid #EBEBEB;
 `
 
-const StyledRow = s(Row)`
-  borderBottom: 1px solid #EBEBEB;
+const StyledRow = s.div`
+  border-bottom: 1px solid #EBEBEB;
   padding-bottom: 1em;
   margin-bottom: 1em;
   margin-right: 0.5em;
@@ -42,16 +35,7 @@ interface IHomeProps {
 
 const Home = ({
   pageContext: {
-    centerpiece: {
-      dominantMedia: {
-        attachment_uuid: center_uuid,
-        extension: center_extension
-      },
-      headline: center_headline,
-      abstract: center_abstract,
-      slug: center_slug,
-      created_at: center_created
-    },
+    centerpiece,
     topArticles,
     mostReadDP,
     mostRead34,
@@ -63,44 +47,39 @@ const Home = ({
       <Container style={{ marginTop: '1.5em' }}>
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
           <Col xs={9}>
-            <SubHeader> NEWS </SubHeader>
+            <SectionHeader > NEWS </SectionHeader >
             <Row style={{ marginBottom: '1em', borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
               <Col xs={4} style={{ borderRight: '1px solid #EBEBEB' }}>
-                {topArticles.map(({
-                    dominantMedia: { attachment_uuid, extension },
-                    headline,
-                    slug,
-                    created_at
-                  }) => (
-                    <StyledLink key={slug} to={`/article/${generateSlug(slug, created_at)}`}>
-                      <StyledRow>
-                        <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
-                        <strong>{headline}</strong>
-                      </StyledRow>
-                    </StyledLink>
-                  ))}
+                {topArticles.map((article, idx) => (
+                  <StyledRow>
+                    <Article article={article} includeAbstract={idx === 0 ? true : false} />
+                  </StyledRow>
+                ))}
               </Col>
               <Col>
-                <StyledLink to={`/article/${generateSlug(center_slug, center_created)}`}>
-                  <Image fluid src={IMAGE_URL(center_uuid, center_extension)} />
-                  <h4> {center_headline} </h4>
-                  <p dangerouslySetInnerHTML={{ __html: center_abstract }} />
-                </StyledLink>
+                <Article article={centerpiece} includeAbstract isCenter/>
               </Col>
             </Row>
-            <SubHeader> TRENDING </SubHeader>
+            <SectionHeader > TRENDING </SectionHeader >
             <Filler color="#DFF3DB"/>
             <Line />
-            <SubHeader> FROM 34TH STREET </SubHeader>
+
+            <SectionHeader > NEWS </SectionHeader >
+
+            <Line />
+
+            <SectionHeader> VISUAL STORIES </SectionHeader >
+
+            <SectionHeader> FROM 34TH STREET </SectionHeader >
             <p style={{ fontStyle: 'italic' }}> The DP&#39;s arts and culture magazine </p>
             <div style={{ borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
-            <StyledAnchorTag href={`https://www.34st.com${mostRead34[0].path}`}> 
-              <div style={{ textAlign: 'center', padding: '0 5em' }}>
-                <img style={{ height: '300px' }} src={mostRead34[0].image} />
-                <p> <strong dangerouslySetInnerHTML={{ __html: mostRead34[0].ogTitle }} /> </p>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-              </div>
-            </StyledAnchorTag>
+              <StyledAnchorTag href={`https://www.34st.com${mostRead34[0].path}`}> 
+                <div style={{ textAlign: 'center', padding: '0 5em' }}>
+                  <img style={{ height: '300px' }} src={mostRead34[0].image} />
+                  <p> <strong dangerouslySetInnerHTML={{ __html: mostRead34[0].ogTitle }} /> </p>
+                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                </div>
+              </StyledAnchorTag>
             </div>
             <Row style={{ marginTop: '1em', borderBottom: '1px solid #A9A9A9', paddingBottom: '1em', marginRight: '1em' }}>
               <Col xs={6} style={{ fontSize: '90%', padding: '0 2em', borderRight: '1px solid #EBEBEB' }}>
@@ -116,7 +95,7 @@ const Home = ({
               </StyledAnchorTag>
               </Col>
             </Row>
-            <SubHeader> FROM UNDER THE BUTTON </SubHeader>
+            <SectionHeader > FROM UNDER THE BUTTON </SectionHeader >
             <p style={{ fontStyle: 'italic' }}> Penn&#39;s only intentionally satirical publication </p>
             <div style={{ borderBottom: '1px solid #EBEBEB', padding: '1em 0', marginRight: '1em' }}>
               {console.log(mostReadUTB[0])}
