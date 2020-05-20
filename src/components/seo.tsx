@@ -74,7 +74,10 @@ const SEO = ({ description, lang, meta, title }: ISEOProps): React.ReactElement 
           content: metaDescription,
         },
       ].concat(meta || [])}
-    />
+    >
+      {/* <div id="fb-root"></div> */}
+      <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=1109283479265272&autoLogAppEvents=1" />
+    </Helmet>
   )
 }
 

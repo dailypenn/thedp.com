@@ -48,6 +48,12 @@ const Line = s(Row)`
   border-bottom: 1px solid #EBEBEB;
 `
 
+const CommentWrapper = s.div`
+  iframe {
+    width: 100% !important;
+  }
+`
+
 interface IArticleProps {
   pageContext: {
     article: IArticle
@@ -88,6 +94,8 @@ const Article: React.FC<IArticleProps> = ({
             <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
             <CaptionText dangerouslySetInnerHTML={{ __html: imageContent }} />
             <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
+
+            <CommentWrapper className="fb-comments" data-href={window.location.href} data-numposts="15" data-width="" />
 
             <SectionHeader> READ MORE </SectionHeader>
             <Line />

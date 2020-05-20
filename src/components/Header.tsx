@@ -14,9 +14,10 @@ import {
   TwitterIcon,
   InstagramIcon,
   SearchIcon,
-  StyledLink
+  StyledLink,
 } from './shared'
 import { NavBarLinks } from '../constants'
+import SEO from './seo'
 
 const TopRow = s.div`
   text-align: center;
@@ -119,6 +120,7 @@ const LogoImage = s.img`
 // TODO: Make mcModal trigger a modal
 const Header = (): React.ReactElement => (
   <>
+    <SEO />
     <TopRow className="hidden-xs">
       <div style={{ display: 'block' }}>
         <StyledLink to="/">
