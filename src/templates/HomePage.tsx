@@ -64,6 +64,9 @@ const Home = ({
             <Filler color="#DFF3DB"/>
             <Line />
 
+            {/* TODO: add the newsletter div here */}
+            <div> NEWSLETTER </div>
+            
             <SectionHeader > NEWS </SectionHeader >
 
             <Line />
