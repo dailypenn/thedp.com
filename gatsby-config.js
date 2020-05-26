@@ -3,11 +3,13 @@ module.exports = {
     title: 'The Daily Pennsylvanian',
     description: 'new website for the Daily Pennsylvanian',
     author: '@theDP Web Department 2020',
+    siteURL: `https://dailypenn.github.io/thedp.com/`
   },
   pathPrefix: '/thedp.com',
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-typescript',
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
