@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/pages/staff.tsx"],"names":["Staff"],"mappings":"6FAEA,OAEeA,UAFD,kBAA0B","file":"component---src-pages-staff-tsx-c6e6480f0e4ccd9cb372.js","sourcesContent":["import React from 'react'\n\nconst Staff = (): React.ReactElement => null\n\nexport default Staff\n"],"sourceRoot":""}
