@@ -95,7 +95,7 @@ const Article: React.FC<IArticleProps> = ({
             <CaptionText dangerouslySetInnerHTML={{ __html: imageContent }} />
             <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
 
-            <CommentWrapper className="fb-comments" data-href={window.location.href} data-numposts="15" data-width="" />
+            <CommentWrapper className="fb-comments" data-href={typeof window !== 'undefined' && window.location.href} data-numposts="15" data-width="" />
 
             <SectionHeader> READ MORE </SectionHeader>
             <Line />
