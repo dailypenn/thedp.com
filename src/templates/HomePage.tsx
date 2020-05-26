@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Container, Image } from 'react-bootstrap'
+import { Row, Col, Container, Image, Button } from 'react-bootstrap'
 import s from 'styled-components'
 
 import Layout from '../components/layout'
@@ -11,6 +11,14 @@ import { IArticle, IMostReadArticle } from '../types'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
 import { StyledLink, StyledAnchorTag, Filler, HeadlineText, SectionHeader } from '../components/shared'
 
+import {
+  WHITE,
+  LIGHT_GRAY,
+  GRAY,
+  DP_RED,
+  DP_DARK_RED
+} from '../styles/colors'
+
 const Line = s(Row)`
   margin-right: 1em;
   border-bottom: 1px solid #EBEBEB;
@@ -21,6 +29,25 @@ const StyledRow = s.div`
   padding-bottom: 1em;
   margin-bottom: 1em;
   margin-right: 0.5em;
+`
+const SubscribeButton = s(Button)`
+  border-radius: 5px;
+  color: ${WHITE} !important;
+  background-color: ${DP_RED} !important;
+  border-color: ${DP_DARK_RED} !important;
+`
+const NewsLetterWrapper = s.div`
+  border-top: 5px ${DP_RED} solid;
+  border-right: 3px solid #FFFFFF;
+  border-bottom: 3px solid #FFFFFF;
+  border-left: 3px solid #FFFFFF;
+  box-shadow: 0px 5px 6px #00000029;
+`
+const LogoImage = s.img`
+  width: 700px;
+  display: initial;
+  max-width: 100%;
+  height: auto;
 `
 
 interface IHomeProps {
@@ -64,8 +91,22 @@ const Home = ({
             <Filler color="#DFF3DB"/>
             <Line />
 
-            {/* TODO: add the newsletter div here */}
-            <div> NEWSLETTER </div>
+            <NewsLetterWrapper>
+              <Row style={{ padding: '1.5rem' }}>
+                <Col>
+                  <LogoImage src={'https://d1q35ni5859stt.cloudfront.net/40388fc9a13ea9253e1ca9ed785affde/dist/img/header-logo.svg'}/>
+                  <p>Stay up to date with out daily newsletter.</p>
+                </Col>
+                <Col>
+                  <form>
+                    <Row style={{padding: '7px', border: '2px solid #CCCCCC', borderRadius: '4px'}}>
+                      <input type="text" placeholder="Email" style={{ border: '0px', outline: 'none', marginRight: '100px'}}/>
+                      <SubscribeButton style={{float: 'right'}}> SUBSCRIBE </SubscribeButton>
+                    </Row>
+                  </form>
+                </Col>
+              </Row>
+            </NewsLetterWrapper>
             
             <SectionHeader > NEWS </SectionHeader >
 
