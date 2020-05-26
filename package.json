@@ -21,6 +21,7 @@
     "gatsby-source-filesystem": "^2.1.46",
     "gatsby-source-ghost": "^4.0.3",
     "gatsby-transformer-sharp": "^2.3.13",
+    "gh-pages": "^2.2.0",
     "node-datetime": "^2.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -55,7 +56,8 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "lint": "eslint 'src/**/*.{ts,js,tsx,jsx}'",
-    "lint-fix": "eslint 'src/**/*.{ts,js,tsx,jsx}' --fix"
+    "lint-fix": "eslint 'src/**/*.{ts,js,tsx,jsx}' --fix",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "repository": {
     "type": "git",

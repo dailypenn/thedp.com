@@ -4,6 +4,7 @@ module.exports = {
     description: 'new website for the Daily Pennsylvanian',
     author: '@theDP Web Department 2020',
   },
+  pathPrefix: '/thedp.com',
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-typescript',
