@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row, Col, Container, Image, Button } from 'react-bootstrap'
 import s from 'styled-components'
+import ReactDOM from 'react-dom'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -120,17 +121,22 @@ const Home = ({
                       padding: '7px',
                       border: '2px solid #CCCCCC',
                       borderRadius: '4px',
+                      width: '500px',
                     }}
                   >
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      style={{
-                        border: '0px',
-                        outline: 'none',
-                        marginRight: '100px',
-                      }}
-                    />
+                    <select
+                      style={{ marginRight: '60px', paddingRight: '10px' }}
+                    >
+                      <option value="Dear Penn">Dear Penn</option>
+                      <option value="The Weekly Roundup">
+                        The Weekly Roundup
+                      </option>
+                      <option value="Print Edition of The Daily Pennsylvanian">
+                        Print Edition of The Daily Pennsylvanian
+                      </option>
+                      <option value="The Toast">The Toast</option>
+                    </select>
+
                     <SubscribeButton style={{ float: 'right' }}>
                       {' '}
                       SUBSCRIBE{' '}
@@ -168,13 +174,7 @@ const Home = ({
                     dangerouslySetInnerHTML={{ __html: mostRead34[0].ogTitle }}
                   />{' '}
                 </p>
-                <p>
-                  {' '}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.{' '}
-                </p>
+                <p> test </p>
               </div>
             </StyledAnchorTag>
           </div>
@@ -203,13 +203,7 @@ const Home = ({
                     dangerouslySetInnerHTML={{ __html: mostRead34[1].ogTitle }}
                   />{' '}
                 </p>
-                <p>
-                  {' '}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.{' '}
-                </p>
+                <p> test </p>
               </StyledAnchorTag>
             </Col>
             <Col style={{ fontSize: '90%', padding: '0 2em' }}>
@@ -222,13 +216,7 @@ const Home = ({
                     dangerouslySetInnerHTML={{ __html: mostRead34[2].ogTitle }}
                   />{' '}
                 </p>
-                <p>
-                  {' '}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.{' '}
-                </p>
+                <p> test </p>
               </StyledAnchorTag>
             </Col>
           </Row>
@@ -256,13 +244,7 @@ const Home = ({
                     dangerouslySetInnerHTML={{ __html: mostReadUTB[0].ogTitle }}
                   />{' '}
                 </p>
-                <p>
-                  {' '}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.{' '}
-                </p>
+                <p> test </p>
               </div>
             </StyledAnchorTag>
           </div>
@@ -284,13 +266,7 @@ const Home = ({
                     dangerouslySetInnerHTML={{ __html: mostReadUTB[1].ogTitle }}
                   />{' '}
                 </p>
-                <p>
-                  {' '}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.{' '}
-                </p>
+                <p> test </p>
               </StyledAnchorTag>
             </Col>
             <Col style={{ fontSize: '90%', padding: '0 2em' }}>
@@ -303,13 +279,7 @@ const Home = ({
                     dangerouslySetInnerHTML={{ __html: mostReadUTB[2].ogTitle }}
                   />{' '}
                 </p>
-                <p>
-                  {' '}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.{' '}
-                </p>
+                <p> test </p>
               </StyledAnchorTag>
             </Col>
           </Row>
