@@ -7,7 +7,7 @@ import SEO from '../components/seo'
 import Footer from '../components/Footer'
 import { Filler } from '../components/shared'
 import RightCol from '../components/home/RightCol'
-import { IArticle, IAuthor, IMostReadArticle } from '../types'
+import { IArticle, IAuthor, IMostReadArticle } from '../utils/types'
 
 interface ISubHeaderProps {
   color: string

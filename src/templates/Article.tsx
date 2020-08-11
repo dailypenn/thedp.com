@@ -2,12 +2,13 @@ import React from 'react'
 import { Row, Col, Container, Image } from 'react-bootstrap'
 import s from 'styled-components'
 import datetime from 'node-datetime'
+import { graphql } from 'gatsby'
 
 import RightCol from '../components/home/RightCol'
 import Layout from '../components/layout'
 import Footer from '../components/Footer'
-import { IArticle, IMostReadArticle } from '../types'
-import { IMAGE_URL } from '../utils/helperFunctions'
+import { IArticle, IMostReadArticle } from '../utils/types'
+import { IMAGE_URL, AUTHORS_STRING } from '../utils/helperFunctions'
 import {
   Filler,
   ArticleContent,
@@ -55,27 +56,34 @@ const CommentWrapper = s.div`
 `
 
 interface IArticleProps {
-  pageContext: {
-    article: IArticle
-    mostReadDP: IMostReadArticle[]
+  data: {
+    allArticle: {
+      edges: [{ node: IArticle }]
+    }
+    // mostReadDP: IMostReadArticle[]
   }
 }
 
 const Article: React.FC<IArticleProps> = ({
-  pageContext: {
-    article: {
-      authors: [{ name }],
-      dominantMedia: {
-        attachment_uuid,
-        created_at,
-        extension,
-        content: imageContent
-      },
-      headline,
-      abstract,
-      content
-    },
-    mostReadDP
+  data: {
+    allArticle: {
+      edges: [
+        {
+          node: {
+            abstract,
+            authors,
+            dominantMedia: {
+              attachment_uuid,
+              created_at,
+              extension,
+              content: imageContent
+            },
+            headline,
+            content
+          }
+        }
+      ]
+    }
   }
 }) => (
     <Layout>
@@ -86,7 +94,7 @@ const Article: React.FC<IArticleProps> = ({
             <AbstractText_HEEBO dangerouslySetInnerHTML={{ __html: abstract }} />
             <AuthorWrapper>
               <Circle />
-              <AuthorName> By {name} </AuthorName>
+              <AuthorName> By {AUTHORS_STRING(authors)} </AuthorName>
               <MailIcon style={{ alignSelf: 'center', transform: 'scale(0.8)' }} />
             </AuthorWrapper>
             <div>{datetime.create(created_at).format(`f D, Y · I:M p`)}</div>
@@ -114,11 +122,35 @@ const Article: React.FC<IArticleProps> = ({
               </Col>
             </Row>
           </Col>
-          <RightCol mostReadDP={mostReadDP} />
+          {/* <RightCol mostReadDP={mostReadDP} /> */}
         </Row>
       </Container>
       <Footer />
     </Layout>
 )
+
+
+export const query = graphql`
+  query($uuid: String!) {
+    allArticle(filter: {uuid: {eq: $uuid}}) {
+      edges {
+        node {
+          abstract
+          authors {
+            name
+          }
+          dominantMedia {
+            attachment_uuid
+            created_at
+            extension
+            content
+          }
+          headline
+          content
+        }
+      }
+    }
+  }
+`
 
 export default Article

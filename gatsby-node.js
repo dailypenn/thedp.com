@@ -132,12 +132,65 @@ const createSection = (linksArray, createPage) => (
   })
 )
 
-exports.createPages = async ({ actions }) => {
+exports.sourceNodes = async ({ actions, createContentDigest }) => {
+  const { createNode } = actions
+  for (let i = 1; i <= 2663; i++) {
+    newsResponse = await axios.get(`https://www.thedp.com/section/news.json?page=${i}&per_page=20`)
+    const { articles } = newsResponse.data
+    articles.forEach(article => {
+      createNode({
+        ...article,
+        id: article.uuid,
+        parent: null,
+        children: [],
+        internal: {
+          type: 'article',
+          content: JSON.stringify(article),
+          contentDigest: createContentDigest(article)
+        }
+      })
+    })
+  }
+
+  return
+}
+
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  // await createSection(AboutLinks, createPage)
-  await createSection(NewsLinks, createPage)
-  await createSection(SportsLinks, createPage)
-  await createSection(OpinionLinks, createPage)
-  await createHomePage(createPage)
-  await createArticles(createPage)
+  const result = await graphql(`
+    query {
+      allArticle {
+        edges {
+          node {
+            abstract
+            authors {
+              name
+            }
+            dominantMedia {
+              attachment_uuid
+              created_at
+              extension
+              content
+            }
+            headline
+            content
+            slug
+            created_at
+            uuid
+          }
+        }
+      }
+    }
+  `)
+
+  result.data.allArticle.edges.forEach(({ node }) => {
+    createPage({
+      path: `/article/${generateSlug(node.slug, node.created_at)}`,
+      component: ArticleTemplate,
+      context: {
+        uuid: node.uuid
+        // mostReadDP: mostReadDPResp.data.result.slice(0, 5),
+      }
+    })
+  })
 }

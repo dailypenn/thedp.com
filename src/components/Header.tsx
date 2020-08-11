@@ -16,7 +16,7 @@ import {
   SearchIcon,
   StyledLink,
 } from './shared'
-import { NavBarLinks } from '../constants'
+import { NavBarLinks } from '../utils/constants'
 import SEO from './seo'
 
 const TopRow = s.div`

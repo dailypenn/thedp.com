@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col, Container, Image } from 'react-bootstrap'
 
-import { IArticle, IMostReadArticle } from '../types'
+import { IArticle, IMostReadArticle } from '../utils/types'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Footer from '../components/Footer'

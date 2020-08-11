@@ -9,9 +9,9 @@ import {
   OpinionLinks,
   StreetLinks,
   UnderTheButtonLinks
-} from '../constants'
+} from '../utils/constants'
 import { StyledLink, StyledAnchorTag } from '../components/shared'
-import { ILink  } from '../types'
+import { ILink  } from '../utils/types'
 
 const Wrapper = s.div`
   padding: 0 10em;

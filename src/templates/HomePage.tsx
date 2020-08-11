@@ -7,7 +7,7 @@ import SEO from '../components/seo'
 import Footer from '../components/Footer'
 import RightCol from '../components/home/RightCol'
 import Article from '../components/Article'
-import { IArticle, IMostReadArticle } from '../types'
+import { IArticle, IMostReadArticle } from '../utils/types'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
 import { StyledLink, StyledAnchorTag, Filler, HeadlineText, SectionHeader } from '../components/shared'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-bootstrap'
 
-import { IArticle } from '../types'
+import { IArticle } from '../utils/types'
 import { StyledLink, HeadlineText, AbstractText } from '../components/shared'
 import { generateSlug, IMAGE_URL } from '../utils/helperFunctions'
 

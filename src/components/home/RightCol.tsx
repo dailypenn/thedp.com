@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Card, ListGroup } from 'react-bootstrap'
 import s from 'styled-components'
 
-import { IMostReadArticle } from '../../types'
+import { IMostReadArticle } from '../../utils/types'
 import { MostReadCard, StyledLink } from '../shared'
 
 const SubHeader = s.h3`
