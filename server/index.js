@@ -1,7 +1,12 @@
-const express = require('express')
+const http = require('http');
+const express = require('express');
 const axios = require('axios')
 const { ApolloServer, PubSub, gql } = require('apollo-server-express')
 const { RESTDataSource } = require('apollo-datasource-rest')
+
+// Pubsub init and ENUM def
+const pubsub = new PubSub();
+const ARTICLE_EDITED = 'ARTICLE_EDITED'
 
 const typeDefs = gql`
     type Subscription {
@@ -37,6 +42,11 @@ class ContentAPI extends RESTDataSource {
 }
 
 const resolvers = {
+    Subscription: {
+        articleEdited: {
+            subscribe: () => pubsub.asyncIterator([ARTICLE_EDITED])
+        },
+    },
     Query: {
         article: async (_, { slug }, { dataSources }) => dataSources.contentAPI.getArticle(slug),
         articles: async (_, _args, { dataSources }) => dataSources.contentAPI.getArticles()
@@ -63,6 +73,13 @@ app.get('/fetch', async ({ query: { url = '' } }, res) => {
     console.log(`Error occurs at this url: ${url}`)
     console.log(`Error: ${e}`)
   }
+})
+
+app.post('/connector', async (req, res) => {
+    console.log(req.body, typeof req.body)
+    // TODO: JWT Auth
+    await pubsub.publish(ARTICLE_EDITED, { articleEdited: req.body })
+    res.send("nice")
 })
 
 const server = new ApolloServer({
