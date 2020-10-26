@@ -1,5 +1,14 @@
 import React from 'react'
-export default ({ pageContext: context }) => {
+
+interface IArticleProps {
+  pageContext: {
+    slug: String
+    headline: String
+    content: String
+  }
+}
+
+export default ({ pageContext: context } : IArticleProps) => {
     const {
         slug,
         headline,
