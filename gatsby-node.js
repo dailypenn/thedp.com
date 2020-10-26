@@ -62,24 +62,38 @@ const generateSlug = (slug, created_at) => {
   return `${year}/${month}/${slug}`
 }
 
-const createArticles = async createPage => {
-  const newsResp = await axios.get(SECTION_API('/section/news'))
-  const mostReadDPResp = await axios.get(MOST_READ_DP_API)
-
-  newsResp.data.articles.forEach(article => {
-    const { authors, created_at, slug } = article
-    authors.forEach(
-      async author => await createAuthors(createPage, author.slug)
-    )
+// TODO: add action for creating article pages
+// TODO: use generateSlug above to properlly paginate articles based on month/year released
+const createArticles = async (graphql, createPage) => {
+  const result = await graphql(`
+    query {
+      ceo {
+        articles {
+          abstract
+          content
+          headline
+          slug
+        }
+      }
+    }
+  `)
+  result.data.ceo.articles.forEach(({
+    slug,
+    headline,
+    content
+  }) => {
     createPage({
-      path: `/article/${generateSlug(slug, created_at)}`,
+      path: `article/${slug}`,
       component: ArticleTemplate,
       context: {
-        article,
-        mostReadDP: mostReadDPResp.data.result.slice(0, 5),
-      },
+        slug,
+        headline,
+        content
+      }
     })
-  })
+  });
+
+
 }
 
 const createAuthors = async (createPage, slug) => {
@@ -157,40 +171,6 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const result = await graphql(`
-    query {
-      allArticle {
-        edges {
-          node {
-            abstract
-            authors {
-              name
-            }
-            dominantMedia {
-              attachment_uuid
-              created_at
-              extension
-              content
-            }
-            headline
-            content
-            slug
-            created_at
-            uuid
-          }
-        }
-      }
-    }
-  `)
-
-  result.data.allArticle.edges.forEach(({ node }) => {
-    createPage({
-      path: `/article/${generateSlug(node.slug, node.created_at)}`,
-      component: ArticleTemplate,
-      context: {
-        uuid: node.uuid
-        // mostReadDP: mostReadDPResp.data.result.slice(0, 5),
-      }
-    })
-  })
+  await createHomePage(createPage)
+  await createArticles(graphql, createPage)
 }
