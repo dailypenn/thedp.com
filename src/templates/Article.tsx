@@ -4,10 +4,8 @@ import s from 'styled-components'
 import datetime from 'node-datetime'
 import { graphql } from 'gatsby'
 
-import RightCol from '../components/home/RightCol'
 import Layout from '../components/layout'
 import Footer from '../components/Footer'
-import { IArticle, IMostReadArticle } from '../utils/types'
 import { IMAGE_URL, AUTHORS_STRING } from '../utils/helperFunctions'
 import {
   Filler,
@@ -56,34 +54,19 @@ const CommentWrapper = s.div`
 `
 
 interface IArticleProps {
-  data: {
-    allArticle: {
-      edges: [{ node: IArticle }]
-    }
-    // mostReadDP: IMostReadArticle[]
+  pageContext: {
+    slug: String
+    headline: String
+    content: String
   }
 }
 
+// TODO: Add abstract, created_at and other properties to GraphQL schema and pass through to this page
 const Article: React.FC<IArticleProps> = ({
-  data: {
-    allArticle: {
-      edges: [
-        {
-          node: {
-            abstract,
-            authors,
-            dominantMedia: {
-              attachment_uuid,
-              created_at,
-              extension,
-              content: imageContent
-            },
-            headline,
-            content
-          }
-        }
-      ]
-    }
+  pageContext: {
+    slug,
+    headline,
+    content
   }
 }) => (
     <Layout>
@@ -91,16 +74,16 @@ const Article: React.FC<IArticleProps> = ({
         <Row style={{ borderBottom: '1px solid #A9A9A9', paddingBottom: '1em' }}>
           <Col xs={9}>
             <HeadlineText fontSize='200%'> { headline } </HeadlineText>
-            <AbstractText_HEEBO dangerouslySetInnerHTML={{ __html: abstract }} />
+            {/* <AbstractText_HEEBO dangerouslySetInnerHTML={{ __html: abstract }} /> */}
             <AuthorWrapper>
               <Circle />
-              <AuthorName> By {AUTHORS_STRING(authors)} </AuthorName>
+              {/* <AuthorName> By {AUTHORS_STRING(authors)} </AuthorName> */}
               <MailIcon style={{ alignSelf: 'center', transform: 'scale(0.8)' }} />
             </AuthorWrapper>
-            <div>{datetime.create(created_at).format(`f D, Y · I:M p`)}</div>
+            {/* <div>{datetime.create(created_at).format(`f D, Y · I:M p`)}</div> */}
             <Filler color="#DFF3DB" />
-            <Image fluid src={IMAGE_URL(attachment_uuid, extension)} />
-            <CaptionText dangerouslySetInnerHTML={{ __html: imageContent }} />
+            {/* <Image fluid src={IMAGE_URL(attachment_uuid, extension)} /> */}
+            {/* <CaptionText dangerouslySetInnerHTML={{ __html: imageContent }} /> */}
             <ArticleContent dangerouslySetInnerHTML={{ __html: content }} />
 
             <CommentWrapper className="fb-comments" data-href={typeof window !== 'undefined' && window.location.href} data-numposts="15" data-width="" />
