@@ -132,23 +132,32 @@ const createSection = (linksArray, createPage) => (
   })
 )
 
-exports.sourceNodes = async ({ actions, createContentDigest }) => {
+exports.sourceNodes = async ({ cache, actions, createContentDigest }) => {
   const { createNode } = actions
-  for (let i = 1; i <= 2663; i++) {
+  for (let i = 1; i <= 200; i++) {
     newsResponse = await axios.get(`https://www.thedp.com/section/news.json?page=${i}&per_page=20`)
     const { articles } = newsResponse.data
-    articles.forEach(article => {
-      createNode({
-        ...article,
-        id: article.uuid,
-        parent: null,
-        children: [],
-        internal: {
-          type: 'article',
-          content: JSON.stringify(article),
-          contentDigest: createContentDigest(article)
+    articles.forEach(async article => {
+      const cachedArticle = await cache.get(article.uuid)
+
+      // if node has not changed
+      if (cachedArticle && article.modified_at === cachedArticle.modified_at) createNode(cachedArticle)
+      else {
+        // console.log('new')
+        const node = {
+          ...article,
+          id: article.uuid,
+          parent: null,
+          children: [],
+          internal: {
+            type: 'article',
+            content: JSON.stringify(article),
+            contentDigest: createContentDigest(article)
+          }
         }
-      })
+        await cache.set(article.uuid, node)
+        createNode(node)
+      }
     })
   }
 
