@@ -1,5 +1,5 @@
-const http = require('http');
-const express = require('express');
+const http = require('http')
+const express = require('express')
 const axios = require('axios')
 const { ApolloServer, PubSub, gql } = require('apollo-server-express')
 const { RESTDataSource } = require('apollo-datasource-rest')
@@ -26,7 +26,7 @@ const typeDefs = gql`
     }
 `
 class ContentAPI extends RESTDataSource {
-    constructor(){
+    constructor() {
         super();
     }
 
@@ -59,20 +59,20 @@ app.use(express.json());
 
 // Middleware to disable CORS
 app.get('/*', (_, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  next()
+    res.header('Access-Control-Allow-Origin', '*')
+    next()
 })
 
 // Request the data from the url and return it
 app.get('/fetch', async ({ query: { url = '' } }, res) => {
-  try {
-    if (!url) throw new Error('No url param found in query')
-    const { data } = await axios.get(url)
-    res.json(data)
-  } catch (e) {
-    console.log(`Error occurs at this url: ${url}`)
-    console.log(`Error: ${e}`)
-  }
+    try {
+        if (!url) throw new Error('No url param found in query')
+        const { data } = await axios.get(url)
+        res.json(data)
+    } catch (e) {
+        console.log(`Error occurs at this url: ${url}`)
+        console.log(`Error: ${e}`)
+    }
 })
 
 app.post('/connector', async (req, res) => {
