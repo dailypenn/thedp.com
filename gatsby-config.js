@@ -49,7 +49,7 @@ module.exports = {
         typeName: "CEO",
         fieldName: "ceo",
         createLink: () => createHttpLink({
-          uri: "http://localhost:4000/graphql",
+          uri: "http://localhost:5000/graphql",
           fetch
         })
       }
